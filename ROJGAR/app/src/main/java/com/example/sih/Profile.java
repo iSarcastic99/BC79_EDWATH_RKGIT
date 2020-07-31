@@ -92,7 +92,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         ETName = findViewById(R.id.nameET);
         camera = findViewById(R.id.camera);
         profile = findViewById(R.id.profile_image);
-        ETPhone = findViewById(R.id.phoneET);
         BTUsername = findViewById(R.id.usernameBT);
         BTName = findViewById(R.id.nameBT);
         BTPassword = findViewById(R.id.password);
@@ -145,7 +144,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 mStorageReference = FirebaseStorage.getInstance().getReference().child(user_phone).child("Profile Picture");
                 ETUsername.setText(decryptUsername(user_name));
                 ETName.setText(name);
-                ETPhone.setText(user_phone);
 
                 try {
                     final long ONE_MEGABYTE = 1024 * 1024;
@@ -329,7 +327,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         BTPassword.setText("Change Password");
         BTName.setText("Change Name");
         BTCertificates.setText("Update Qualification Certificates");
-        BTPhone.setText("Change Phone");
         getSupportActionBar().setTitle("Profile");
         English = true;
         lang = "Eng";
@@ -343,7 +340,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         BTPassword.setText(R.string.change_password1);
         BTName.setText(R.string.change_name1);
         BTCertificates.setText(R.string.update_qualification_certificates1);
-        BTPhone.setText(R.string.change_phone1);
         getSupportActionBar().setTitle(R.string.profle1);
         English = false;
         lang = "Hin";
@@ -416,12 +412,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 }
                 mVerificationId = verificationId;
                 mResendToken = token;
-                Intent intent = new Intent(Profile.this, Change_Phone.class);
-                intent.putExtra("verificationId", mVerificationId);
-                intent.putExtra("resendToken", mResendToken);
-                intent.putExtra("phone", phone);
-                intent.putExtra("newPhone", ETPhone.getText().toString().trim());
-                startActivity(intent);
         }
 
       };
