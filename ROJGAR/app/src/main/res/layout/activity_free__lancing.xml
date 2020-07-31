@@ -801,6 +801,6 @@
         app:itemTextColor="#2f0739"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/navigation_menu" />
+        app:menu="@menu/navigation_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
