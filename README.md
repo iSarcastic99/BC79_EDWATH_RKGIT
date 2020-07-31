@@ -1,4 +1,4 @@
-# BC79_EDWATH_RKGIT
+# ROJGAR (SMART INDIA HACKATHON 2020)
 This is the Official Repo for ProblemStatement ID BC79 in Smart India Hackathon 2020.
 DataForRojgar contains the Synthetic data for the Android Application ROJGAR.
 MacLearn contains the codes for Machine Learning Model.
