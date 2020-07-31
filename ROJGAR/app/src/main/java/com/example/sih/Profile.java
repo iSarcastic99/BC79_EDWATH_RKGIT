@@ -56,7 +56,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     EditText ETUsername, ETName, ETPhone;
-    Button BTUsername, BTName, BTPhone, BTPassword, BTCertificates;
+    Button BTUsername, BTName, BTPassword, BTCertificates;
     DatabaseReference reff;
     TextView uname, uphone;
     ImageView camera, profile, drawerProfile;
@@ -95,7 +95,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         ETPhone = findViewById(R.id.phoneET);
         BTUsername = findViewById(R.id.usernameBT);
         BTName = findViewById(R.id.nameBT);
-        BTPhone = findViewById(R.id.phoneBT);
         BTPassword = findViewById(R.id.password);
         BTCertificates = findViewById(R.id.certificate);
         FirebaseApp.initializeApp(this);
@@ -241,22 +240,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             public void onClick(View v) {
                 Intent intent = new Intent(Profile.this, Update_Certificates.class);
                 startActivity(intent);
-            }
-        });
-        BTPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (user_phone.equals(ETPhone.getText().toString().trim())) {
-                    if(check.equals("Hin") || !English)
-                    {
-                        Toast.makeText(Profile.this, getResources().getString(R.string.phone_change1), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Profile.this, "Please change your phone before clicking", Toast.LENGTH_SHORT).show();
-                    }
-                } else{
-                    initFireBaseCallbacks();
-                    send_data();
-                }
             }
         });
     }
