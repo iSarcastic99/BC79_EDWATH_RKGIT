@@ -43,17 +43,17 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 public class Government extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    TextView uphone, uname, Premium, Days, jobType;
+    TextView uphone, uname, jobType;
     Boolean English = true;
-    String lang, M, J, S, C, check, phone, u_name, path, days, isPremium, activity, domain, Relation;
+    String lang, M, J, S, C, check, phone, u_name, path, activity, domain;
     int j, i, x, d;
     DrawerLayout drawer;
-    ImageView profile, crown;
+    ImageView profile;
     NavigationView navigationView;
     StorageReference mStorageReference;
     ActionBarDrawerToggle t;
     Menu menu1, menu2;
-    MenuItem Gov, Non_Gov, Tender, Free_Lancing, Swayam;
+    MenuItem Gov, Non_Gov, Tender, Free_Lancing, Resources;
     Boolean isRegistered = false;
     DatabaseReference reff, reff3, reff4;
     RecyclerView gov_jobs;
@@ -215,8 +215,8 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         Gov = menu2.findItem(R.id.government);
         Non_Gov = menu2.findItem(R.id.non_government);
         Tender = menu2.findItem(R.id.tenders);
+        Resources = findViewById(R.id.resources);
         Free_Lancing = menu2.findItem(R.id.free_lancing);
-        Swayam = menu2.findItem(R.id.resources);
         uname = navigationView.getHeaderView(0).findViewById(R.id.name_of_user);
         uphone = navigationView.getHeaderView(0).findViewById(R.id.phone_of_user);
         profile = navigationView.getHeaderView(0).findViewById(R.id.image_of_user);
@@ -457,12 +457,15 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         Non_Gov.setTitle("                  गैर सरकारी नौकरी");
         Tender.setTitle("                  निविदाएं");
         Free_Lancing.setTitle("                  फ़्रीलांसिंग");
+        Resources.setTitle("                  अध्ययन के संसाधन");
+
     }
     public void NavEng(){
         Gov.setTitle("                  Government Jobs");
         Non_Gov.setTitle("                  Non-Government Jobs");
         Tender.setTitle("                  Tenders");
         Free_Lancing.setTitle("                  Freelancing");
+        Resources.setTitle("                  Study Resources");
     }
     @Override
     public void onBackPressed() {
