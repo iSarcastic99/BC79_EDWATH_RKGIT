@@ -165,7 +165,7 @@ public class ContactUs extends AppCompatActivity implements AIListener{
             @Override
             protected void populateViewHolder(chat_rec viewHolder, ChatMessage model, int position) {
 
-                if (model.getMsgUser().equals("user")) {
+                if (model.getMsgUser().equals(phone)) {
 
 
                     viewHolder.rightText.setText(model.getMsgText());
