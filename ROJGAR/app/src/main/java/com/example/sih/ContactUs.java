@@ -160,17 +160,17 @@ public class ContactUs extends AppCompatActivity implements AIListener{
         adapter = new FirebaseRecyclerAdapter<ChatMessage, chat_rec>(ChatMessage.class,R.layout.msglist,chat_rec.class,ref.child("chat")) {
             @Override
             protected void populateViewHolder(chat_rec viewHolder, ChatMessage model, int position) {
-
                 if (model.getMsgUser().equals(phone)) {
-
-
                     viewHolder.rightText.setText(model.getMsgText());
-
                     viewHolder.rightText.setVisibility(View.VISIBLE);
                     viewHolder.leftText.setVisibility(View.GONE);
                 }
                 else {
-                    viewHolder.leftText.setText("Contact firstloveyourself1999@gmail.com for this query");
+                    if(model.getMsgText().equals("")){
+                        viewHolder.leftText.setText("This is a great question, please write us on firstloveyourself1999@gmail.com");
+                    } else {
+                        viewHolder.leftText.setText(model.getMsgText());
+                    }
                     viewHolder.rightText.setVisibility(View.GONE);
                     viewHolder.leftText.setVisibility(View.VISIBLE);
                 }
