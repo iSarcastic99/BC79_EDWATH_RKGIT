@@ -42,10 +42,10 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class Government extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Non_Government extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     TextView uphone, uname, Premium, Days, jobType;
     Boolean English = true;
-    String lang, M, J, S, C, check, phone, u_name, path, days, isPremium, activity, domain, Relation;
+    String lang, M, J, S, C, check, phone, u_name, path, days, isPremium, activity, domain;
     int j, i, x, d;
     DrawerLayout drawer;
     ImageView profile, crown;
@@ -53,7 +53,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
     StorageReference mStorageReference;
     ActionBarDrawerToggle t;
     Menu menu1, menu2;
-    MenuItem Gov, Non_Gov, Tender, Free_Lancing, GetPremium, chat, topJobs, publishJob, Jobs, Features, Connection, Top_Jobs, Publish;
+    MenuItem Gov, Non_Gov, Tender, Free_Lancing, GetPremium, Jobs, Features, Connection, Top_Jobs, Publish;
     Boolean isRegistered = false;
     DatabaseReference reff, reff3, reff4;
     RecyclerView gov_jobs;
@@ -76,7 +76,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         SharedPreferences preferences2 = getSharedPreferences(J,x);
         activity = preferences2.getString("Activity","");
         domain = preferences.getString("Domain", "");
-        setContentView(R.layout.activity_government);
+        setContentView(R.layout.activity_non__government);
         gov_jobs = findViewById(R.id.gov_jobs);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -139,7 +139,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                 3000
         );
 
-        pd = new ProgressDialog(Government.this);
+        pd = new ProgressDialog(Non_Government.this);
 
         if (check.equals("Eng")) {
             pd.setMessage("Fetching data");
@@ -151,7 +151,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
 
         try {
 
-            reff3 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("Government");
+            reff3 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("Private");
             reff3.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -161,15 +161,15 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                     for (int k = 0; k < size; k++) {
 
                         String i = Integer.toString(k);
-                        reff4 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("Government").child(i);
+                        reff4 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("Private").child(i);
                         reff4.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                    job_data d = snapshot.getValue(job_data.class);
-                                    details.add(d);
-                                    govAdapter = new jobs_adapter(Government.this, details);
-                                    gov_jobs.setAdapter(govAdapter);
+                                job_data d = snapshot.getValue(job_data.class);
+                                details.add(d);
+                                govAdapter = new jobs_adapter(Non_Government.this, details);
+                                gov_jobs.setAdapter(govAdapter);
 
 
                             }
@@ -177,9 +177,9 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                                 if(check.equals(getResources().getString(R.string.english))){
-                                    Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Non_Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Non_Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -189,9 +189,9 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     if(check.equals(getResources().getString(R.string.english))){
-                        Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Non_Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Non_Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -221,24 +221,25 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         uname = navigationView.getHeaderView(0).findViewById(R.id.name_of_user);
         uphone = navigationView.getHeaderView(0).findViewById(R.id.phone_of_user);
         profile = navigationView.getHeaderView(0).findViewById(R.id.image_of_user);
+
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(Government.this, Profile.class);
+                Intent profileIntent = new Intent(Non_Government.this, Profile.class);
                 startActivity(profileIntent);
             }
         });
         uphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(Government.this, Profile.class);
+                Intent profileIntent = new Intent(Non_Government.this, Profile.class);
                 startActivity(profileIntent);
             }
         });
         uname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(Government.this, Profile.class);
+                Intent profileIntent = new Intent(Non_Government.this, Profile.class);
                 startActivity(profileIntent);
             }
         });
@@ -303,9 +304,9 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 if (!check.equals(getResources().getString(R.string.english))) {
-                    Toast.makeText(Government.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Non_Government.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(Government.this, "There is some error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Non_Government.this, "There is some error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -326,21 +327,21 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                 SharedPreferences.Editor editor = getSharedPreferences(J,x).edit();
                 editor.putString("Activity", "Private");
                 editor.apply();
-                Intent intent1 = new Intent(Government.this, Non_Government.class);
+                Intent intent1 = new Intent(Non_Government.this, Non_Government.class);
                 startActivity(intent1);
                 break;
             case R.id.free_lancing:
                 SharedPreferences.Editor editor1 = getSharedPreferences(J,x).edit();
                 editor1.putString("Activity", "Freelancing");
                 editor1.apply();
-                Intent intent = new Intent(Government.this, Freelancing.class);
+                Intent intent = new Intent(Non_Government.this, Freelancing.class);
                 startActivity(intent);
                 break;
             case R.id.tenders:
                 SharedPreferences.Editor editor2 = getSharedPreferences(J,x).edit();
                 editor2.putString("Activity", "Tender");
                 editor2.apply();
-                Intent intent5 = new Intent(Government.this, Tenders.class);
+                Intent intent5 = new Intent(Non_Government.this, Tenders.class);
                 startActivity(intent5);
                 break;
 
@@ -380,7 +381,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                 recreate();
                 return true;
             case R.id.logout: {
-                Intent intent = new Intent(Government.this, Login.class);
+                Intent intent = new Intent(Non_Government.this, Login.class);
                 startActivity(intent);
                 SharedPreferences.Editor editor = getSharedPreferences(S, i).edit();
                 editor.putString("Status", "Null");
@@ -389,7 +390,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                 break;
             }
             case R.id.rate_us:
-                Intent rateIntent = new Intent(Government.this, Rating.class);
+                Intent rateIntent = new Intent(Non_Government.this, Rating.class);
                 startActivity(rateIntent);
                 return true;
             case R.id.contact_us:

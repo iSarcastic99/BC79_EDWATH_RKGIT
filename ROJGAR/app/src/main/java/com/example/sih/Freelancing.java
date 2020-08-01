@@ -6,7 +6,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -14,11 +17,13 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,13 +42,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Freelancing extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    TextView uphone, uname;
+    TextView uphone, uname, jobType;
     Boolean English = true;
-    String lang, M, check, S, phone, u_name, path;
-    int j, i;
+    String lang, M, J, check, S, phone, u_name, path, activity, domain;
+    int j, i, x;
     DrawerLayout drawer;
     ImageView profile;
     NavigationView navigationView;
@@ -51,7 +57,12 @@ public class Freelancing extends AppCompatActivity implements NavigationView.OnN
     ActionBarDrawerToggle t;
     Menu menu1, menu2;
     MenuItem Gov, Non_Gov, Tender, Free_Lancing;
-    DatabaseReference reff;
+    DatabaseReference reff, reff3, reff4;
+    RecyclerView freelance;
+    ArrayList<job_data> details;
+    jobs_adapter govAdapter;
+    ProgressDialog pd;
+    int size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +74,141 @@ public class Freelancing extends AppCompatActivity implements NavigationView.OnN
         path = preferences.getString("path", "");
         SharedPreferences preferences1 = getSharedPreferences(M,j);
         check = preferences1.getString("Lang","Eng");
-        setContentView(R.layout.activity_non__government);
+        SharedPreferences preferences2 = getSharedPreferences(J,x);
+        activity = preferences2.getString("Activity","");
+        domain = preferences.getString("Domain", "");
+        setContentView(R.layout.activity_free__lancing);
+
+        freelance = findViewById(R.id.freelance);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.custom_action_bar_2);
+        View view =getSupportActionBar().getCustomView();
+
+        freelance.setLayoutManager(new LinearLayoutManager(this));
+        details = new ArrayList<>();
+
+        jobType = view.findViewById(R.id.jobsType);
+        if (activity.equals("Government")){
+            if(check.equals(getResources().getString(R.string.english))) {
+                jobType.setText("Government Jobs");
+            } else{
+                jobType.setText(R.string.government_jobs1);
+            }
+        }
+
+        else if (activity.equals("Private")){
+            if(check.equals(getResources().getString(R.string.english))) {
+                jobType.setText("Private Jobs");
+            } else{
+                jobType.setText(R.string.non_government_jobs1);
+            }
+        }
+
+        else if (activity.equals("Freelancing")){
+            if(check.equals(getResources().getString(R.string.english))) {
+                jobType.setText("Freelancing");
+            } else{
+                jobType.setText(R.string.freelancing1);
+            }
+        }
+
+        else {
+            if(check.equals(getResources().getString(R.string.english))) {
+                jobType.setText("Tenders");
+            } else{
+                jobType.setText(R.string.tenders1);
+            }
+        }
+        final SearchView mySearchView = view.findViewById(R.id.mySearchView);
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                            @Override
+                            public boolean onQueryTextSubmit(String query) {
+                                return false;
+                            }
+                            @Override
+                            public boolean onQueryTextChange(String newText) {
+                                govAdapter.getFilter().filter(newText);
+                                return false;
+                            }
+                        });
+                    }
+                },
+                3000
+        );
+
+        pd = new ProgressDialog(Freelancing.this);
+
+        if (check.equals("Eng")) {
+            pd.setMessage("Fetching data");
+        } else {
+            pd.setMessage("डेटा लाया जा रहा है");
+        }
+
+        pd.show();
+
+        try {
+
+            reff3 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("Freelancing");
+            reff3.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    size = (int) dataSnapshot.getChildrenCount();
+
+                    for (int k = 0; k < size; k++) {
+
+                        String i = Integer.toString(k);
+                        reff4 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("Freelancing").child(i);
+                        reff4.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                job_data d = snapshot.getValue(job_data.class);
+                                details.add(d);
+                                govAdapter = new jobs_adapter(Freelancing.this, details);
+                                freelance.setAdapter(govAdapter);
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                if(check.equals(getResources().getString(R.string.english))){
+                                    Toast.makeText(Freelancing.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(Freelancing.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    if(check.equals(getResources().getString(R.string.english))){
+                        Toast.makeText(Freelancing.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Freelancing.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pd.dismiss();
+            }
+        }, 3000);
+
         drawer = findViewById(R.id.draw_layout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView = findViewById(R.id.nv);
@@ -162,14 +307,23 @@ public class Freelancing extends AppCompatActivity implements NavigationView.OnN
         switch (menuItem.getItemId()){
 
             case R.id.government:
+                SharedPreferences.Editor editor = getSharedPreferences(J,x).edit();
+                editor.putString("Activity", "Government");
+                editor.apply();
                 Intent intent1 = new Intent(Freelancing.this,Government.class);
                 startActivity(intent1);
                 break;
             case R.id.non_government:
+                SharedPreferences.Editor editor1 = getSharedPreferences(J,x).edit();
+                editor1.putString("Activity", "Private");
+                editor1.apply();
                 Intent intent = new Intent(Freelancing.this, Private.class);
                 startActivity(intent);
                 break;
             case R.id.tenders:
+                SharedPreferences.Editor editor2 = getSharedPreferences(J,x).edit();
+                editor2.putString("Activity", "Tender");
+                editor2.apply();
                 Intent intent5 = new Intent(Freelancing.this, Tenders.class);
                 startActivity(intent5);
                 break;
