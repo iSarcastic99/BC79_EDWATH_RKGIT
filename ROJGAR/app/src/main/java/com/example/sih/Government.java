@@ -53,7 +53,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
     StorageReference mStorageReference;
     ActionBarDrawerToggle t;
     Menu menu1, menu2;
-    MenuItem Gov, Non_Gov, Tender, Free_Lancing;
+    MenuItem Gov, Non_Gov, Tender, Free_Lancing, Swayam;
     Boolean isRegistered = false;
     DatabaseReference reff, reff3, reff4;
     RecyclerView gov_jobs;
@@ -216,6 +216,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         Non_Gov = menu2.findItem(R.id.non_government);
         Tender = menu2.findItem(R.id.tenders);
         Free_Lancing = menu2.findItem(R.id.free_lancing);
+        Swayam = menu2.findItem(R.id.resources);
         uname = navigationView.getHeaderView(0).findViewById(R.id.name_of_user);
         uphone = navigationView.getHeaderView(0).findViewById(R.id.phone_of_user);
         profile = navigationView.getHeaderView(0).findViewById(R.id.image_of_user);
@@ -320,6 +321,13 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                 Intent intent5 = new Intent(Government.this, Tenders.class);
                 startActivity(intent5);
                 break;
+            case R.id.resources:
+                Intent redirectIntent = new Intent(Intent.ACTION_VIEW);
+                redirectIntent.addCategory(Intent.CATEGORY_BROWSABLE);
+                redirectIntent.setData(Uri.parse("https://swayam.gov.in/"));
+                startActivity(redirectIntent);
+                break;
+
 
         }
         drawer.closeDrawer(GravityCompat.START);
