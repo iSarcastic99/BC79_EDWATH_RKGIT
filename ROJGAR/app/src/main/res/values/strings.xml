@@ -22,6 +22,12 @@
     <string name="register">Register</string>
     <string name="english">Eng</string>
     <string name="check_internet">Please check your internet connection</string>
+    <string name="title">Job Title: </string>
+    <string name="desc">Job Description: </string>
+    <string name="exp">Work Experience: </string>
+    <string name="city">Reporting City: </string>
+    <string name="email">Contact E-mail: </string>
+    <string name="error">There is some error</string>
     <string name="check_internet1">कृपया अपने इंटरनेट कनेक्शन की जाँच करें</string>
     <string name="top_categories1">शीर्ष श्रेणियां</string>
     <string name="bank_jobs1">बैंक नौकरियां</string>
@@ -121,5 +127,19 @@
     <string name="phone_verify1">फ़ोन सत्यापित करें</string>
     <string name="profle1">प्रोफ़ाइल</string>
     <string name="phone_changed1">आपका फ़ोन नंबर बदल दिया गया है</string>
+    <string-array name="jobtype">
+        <item>Select Job Type</item>
+        <item>Government</item>
+        <item>Private</item>
+        <item>Tender</item>
+        <item>Freelancing</item>
+    </string-array>
+    <string-array name="jobtype1">
+        <item>नौकरी के प्रकार का चयन करें</item>
+        <item>सरकारी नौकरियां</item>
+        <item>गैर सरकारी नौकरियां</item>
+        <item>निविदाएं</item>
+        <item>फ़्रीलांसिंग</item>
+    </string-array>
 
 </resources>

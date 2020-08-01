@@ -53,7 +53,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
     StorageReference mStorageReference;
     ActionBarDrawerToggle t;
     Menu menu1, menu2;
-    MenuItem Gov, Non_Gov, Tender, Free_Lancing, GetPremium, chat, topJobs, publishJob, Jobs, Features, Connection, Top_Jobs, Publish;
+    MenuItem Gov, Non_Gov, Tender, Free_Lancing;
     Boolean isRegistered = false;
     DatabaseReference reff, reff3, reff4;
     RecyclerView gov_jobs;
@@ -69,8 +69,6 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         SharedPreferences preferences = getSharedPreferences(S, i);
         phone = preferences.getString("Phone", "");
         path = preferences.getString("path", "");
-        isPremium = preferences.getString("isPremium", "No");
-        days = preferences.getString("remainingDays", "0");
         SharedPreferences preferences1 = getSharedPreferences(M, j);
         check = preferences1.getString("Lang", "Eng");
         SharedPreferences preferences2 = getSharedPreferences(J,x);
@@ -248,27 +246,6 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 u_name = dataSnapshot.child("Username").getValue().toString();
                 phone = dataSnapshot.child("Phone").getValue().toString();
-                if (isPremium.equals("Yes")) {
-                    if (check.equals("Hin")) {
-                        Premium.setText("प्रीमियम");
-                    }
-                    Premium.setVisibility(View.VISIBLE);
-                    crown.setVisibility(View.VISIBLE);
-                    if (days.equals("1")) {
-                        if (check.equals("Hin")) {
-                            Days.setText(days + " दिन शेष");
-                        } else {
-                            Days.setText(days + " day remaining");
-                        }
-                    } else {
-                        if (check.equals("Hin")) {
-                            Days.setText(days + " दिन शेष");
-                        } else {
-                            Days.setText(days + " days remaining");
-                        }
-                    }
-                    Days.setVisibility(View.VISIBLE);
-                }
                 String username = decryptUsername(u_name).toString();
                 mStorageReference = FirebaseStorage.getInstance().getReference().child(phone).child("Profile Picture");
                 try {
@@ -472,32 +449,12 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         Non_Gov.setTitle("                  गैर सरकारी नौकरी");
         Tender.setTitle("                  निविदाएं");
         Free_Lancing.setTitle("                  फ़्रीलांसिंग");
-        GetPremium.setTitle("                  प्रीमियम प्राप्त करें");
-        Publish.setTitle("                  अपनी नौकरी प्रकाशित करें");
-        Top_Jobs.setTitle("                  शीर्ष नौकरियां");
-        Connection.setTitle("                  अपने कनेक्शन बनाएँ");
-        Premium.setText("प्रीमियम");
-        Days.setText(days + " दिन शेष");
-        Jobs.setTitle("           नौकरी क्षेत्र");
-        Features.setTitle("           अधिक सुविधाएं");
     }
     public void NavEng(){
         Gov.setTitle("                  Government Jobs");
         Non_Gov.setTitle("                  Non-Government Jobs");
         Tender.setTitle("                  Tenders");
         Free_Lancing.setTitle("                  Freelancing");
-        GetPremium.setTitle("                  Get Premium");
-        Publish.setTitle("                  Publish Your Job");
-        Top_Jobs.setTitle("                  Top Jobs");
-        Connection.setTitle("                  Build Your Connections");
-        Premium.setText("Premium");
-        if(days.equals("1")){
-            Days.setText(days + " day remaining");
-        } else {
-            Days.setText(days + "days remaining");
-        }
-        Jobs.setTitle("           Job Sectors");
-        Features.setTitle("           More Features");
     }
     @Override
     public void onBackPressed() {

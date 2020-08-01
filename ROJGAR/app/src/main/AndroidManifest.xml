@@ -12,7 +12,12 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".jobApply"></activity>
+        <activity android:name=".jobDetails"></activity>
+        <activity android:name=".jobPost" />
+        <activity android:name=".jobsPublished" />
+        <activity android:name=".companyProof" />
+        <activity android:name=".CreateYourJob" />
+        <activity android:name=".jobApply" />
         <activity android:name=".Job_Details" />
         <activity android:name=".Change_Phone" />
         <activity android:name=".Update_Certificates" />
