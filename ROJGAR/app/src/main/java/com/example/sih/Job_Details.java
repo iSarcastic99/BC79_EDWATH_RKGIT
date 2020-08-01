@@ -18,6 +18,10 @@ import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.firebase.client.annotations.NotNull;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
