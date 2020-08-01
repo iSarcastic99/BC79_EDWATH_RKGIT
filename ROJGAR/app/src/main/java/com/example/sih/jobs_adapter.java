@@ -15,6 +15,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -162,7 +167,6 @@ public class jobs_adapter extends RecyclerView.Adapter<jobs_adapter.MyViewHolder
         try (InputStream is = context.getResources().openRawResource(R.raw.translate)) {
 
             final GoogleCredentials myCredentials = GoogleCredentials.fromStream(is);
-
             TranslateOptions translateOptions = TranslateOptions.newBuilder().setCredentials(myCredentials).build();
             translate = translateOptions.getService();
 
