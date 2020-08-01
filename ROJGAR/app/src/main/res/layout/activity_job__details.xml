@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Job_Details">
+    tools:context=".Jobs.Job_Details">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -25,10 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/abril_fatface"
-                android:gravity="center"
                 android:padding="4dp"
                 android:textSize="36sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/company_name"
@@ -112,6 +112,36 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/favButton"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:text="Add to Dream Job"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.98"
+        app:layout_constraintHorizontal_bias="0.05"/>
+
+    <Button
+        android:id="@+id/roadmapButton"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:text= "create roadmap"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.98"
+        app:layout_constraintHorizontal_bias="0.05"/>
+
+    <Button
         android:id="@+id/apply"
         android:layout_width="165dp"
         android:layout_height="50dp"
@@ -123,6 +153,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.98"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintHorizontal_bias="0.9"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

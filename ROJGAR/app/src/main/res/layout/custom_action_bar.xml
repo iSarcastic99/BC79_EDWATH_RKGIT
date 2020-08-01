@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:text="Rojgar"
+        android:textSize="22sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.05"/>
+
+
+    <ImageView
+        android:id="@+id/premium"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_sih_premium_crown"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@+id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.33"/>
+
+    <ImageView
+        android:id="@+id/dream_jobs"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/likes"
+        app:layout_constraintStart_toEndOf="@+id/premium"
+        app:layout_constraintEnd_toStartOf="@id/profile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"/>
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_person_white_24dp"
+        app:layout_constraintStart_toEndOf="@id/dream_jobs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

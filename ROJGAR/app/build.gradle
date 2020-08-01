@@ -7,26 +7,25 @@ repositories {
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
+
     defaultConfig {
         applicationId "com.example.sih"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath true
-            }
-        }
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
+
+
+//    buildTypes {
+//        release {
+//            shrinkResources true
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+//    }
+
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
@@ -39,41 +38,55 @@ android {
         exclude 'META-INF/ASL2.0'
         exclude 'project.properties'
     }
+
+    configurations {
+        implementation.exclude module:'protobuf-lite'
+    }
+
+    aaptOptions {
+        noCompress "tflite"
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.firebase:firebase-client-android:2.5.2'
-    implementation 'com.google.firebase:firebase-database:19.1.0'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
     implementation 'com.android.volley:volley:1.1.0'
-    implementation 'de.hdodenhof:circleimageview:3.0.1'
-    implementation 'androidx.appcompat:appcompat:1.0.'
-    implementation 'commons-io:commons-io:2.6'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.firebase:firebase-messaging:20.2.3'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-core:17.4.4'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
+    implementation 'com.google.firebase:firebase-analytics:17.4.4'
+    implementation 'com.google.mlkit:smart-reply:16.1.0'
+    implementation 'com.google.android.gms:play-services-ads:19.3.0'
+    implementation 'com.google.firebase:firebase-dynamic-links:19.1.0'
     implementation('com.google.cloud:google-cloud-translate:1.12.0') {
         exclude group: 'org.apache.httpcomponents'
         exclude group: 'org.json', module: 'json'
         exclude group: 'com.google.auto.value'
     }
+//    implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
+//    implementation 'com.google.firebase:firebase-functions:19.0.2'
+//    implementation 'com.google.firebase:firebase-appindexing:19.1.0'
+  //  implementation 'com.google.firebase:firebase-perf:19.0.7'
     annotationProcessor 'com.google.cloud:google-cloud-translate:1.12.0'
-    implementation 'com.google.firebase:firebase-auth:19.2.0'
-    implementation 'com.google.firebase:firebase-database:11.2.2'
-    implementation 'com.firebaseui:firebase-ui-database:2.3.0'
-    implementation 'ai.api:sdk:2.0.7@aar'
-    implementation 'ai.api:libai:1.4.8'
-    implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'commons-io:commons-io:2.6'
-    implementation 'com.google.firebase:firebase-core:17.4.4'
     testImplementation 'junit:junit:4.13'
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.google.firebase:firebase-storage:19.1.1'
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
-    implementation 'org.apache.logging.log4j:log4j-api:2.8.2'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 }
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.firebase.firebase-perf'
