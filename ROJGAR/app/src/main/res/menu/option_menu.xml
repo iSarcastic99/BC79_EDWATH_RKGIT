@@ -8,6 +8,8 @@
         android:title="Go To Profile"/>
     <item android:id="@+id/rate_us"
         android:title="Rate Us"/>
+    <item android:id="@+id/publishJob"
+        android:title="Publish Your Job"/>
     <item android:id="@+id/logout"
         android:title="Logout"/>
     <item android:id="@+id/contact_us"

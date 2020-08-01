@@ -34,10 +34,11 @@ public class MainActivity extends AppCompatActivity {
     ImageButton Gov, Non_Gov, Tenders, Free_Lancing;
     RelativeLayout menus;
     DatabaseReference reff;
-    String phone, S, M, user_name, check, lang;
+    String phone, S, M, user_name, check, lang, J;
     Menu menu1;
     Boolean English = true;
-    int i, j;
+    int i, j, x;
+    Boolean isRegistered = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         Gov.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor = getSharedPreferences(J,x).edit();
+                editor.putString("Activity", "Government");
+                editor.apply();
                 Intent govIntent = new Intent(MainActivity.this, Government.class);
                 startActivity(govIntent);
             }
@@ -77,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
         Non_Gov.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor1 = getSharedPreferences(J,x).edit();
+                editor1.putString("Activity", "Private");
+                editor1.apply();
                 Intent nonIntent = new Intent(MainActivity.this, Private.class);
                 startActivity(nonIntent);
             }
@@ -84,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
         Tenders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor2 = getSharedPreferences(J,x).edit();
+                editor2.putString("Activity", "Tender");
+                editor2.apply();
                 Intent tenderIntent = new Intent(MainActivity.this, Tenders.class);
                 startActivity(tenderIntent);
             }
@@ -91,6 +101,9 @@ public class MainActivity extends AppCompatActivity {
         Free_Lancing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor3 = getSharedPreferences(J,x).edit();
+                editor3.putString("Activity", "Freelancing");
+                editor3.apply();
                 Intent freeIntent = new Intent(MainActivity.this, Freelancing.class);
                 startActivity(freeIntent);
             }
@@ -165,6 +178,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.go_to_profile:
                 Intent profileIntent = new Intent(MainActivity.this, Profile.class);
                 startActivity(profileIntent);
+                return true;
+
+            case R.id.publishJob:
+                if (!isRegistered) {
+                    Intent intent7 = new Intent(MainActivity.this, CreateYourJob.class);
+                    startActivity(intent7);
+                }
+                else{
+                    Intent intent7 = new Intent(MainActivity.this, jobsPublished.class);
+                    startActivity(intent7);
+                }
                 return true;
 
             default:

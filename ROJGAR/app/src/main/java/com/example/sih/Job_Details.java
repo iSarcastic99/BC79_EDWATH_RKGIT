@@ -123,7 +123,7 @@ public class Job_Details extends AppCompatActivity {
 
     public void getJobPost(final String jobReference) {
 
-        reff = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domainType).child(TAG).child(jobCategory).child(jobReference);
+        reff = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domainType).child(jobCategory).child(jobReference);
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
