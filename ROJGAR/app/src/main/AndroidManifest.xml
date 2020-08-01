@@ -47,6 +47,7 @@
         <activity android:name=".Register2" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
+        <activity android:name=".ContactUs" />
 
         <activity android:name=".CreateYourJob">
             <intent-filter>
