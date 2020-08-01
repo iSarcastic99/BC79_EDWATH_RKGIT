@@ -109,7 +109,6 @@ public class ContactUs extends AppCompatActivity implements AIListener{
                         @Override
                         protected void onPostExecute(AIResponse response) {
                             if (response != null) {
-
                                 Result result = response.getResult();
                                 String reply = result.getFulfillment().getSpeech();
                                 ChatMessage chatMessage = new ChatMessage(reply, "bot");
@@ -121,13 +120,9 @@ public class ContactUs extends AppCompatActivity implements AIListener{
                 else {
                     aiService.startListening();
                 }
-
                 editText.setText("");
-
             }
         });
-
-
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -165,18 +160,17 @@ public class ContactUs extends AppCompatActivity implements AIListener{
         adapter = new FirebaseRecyclerAdapter<ChatMessage, chat_rec>(ChatMessage.class,R.layout.msglist,chat_rec.class,ref.child("chat")) {
             @Override
             protected void populateViewHolder(chat_rec viewHolder, ChatMessage model, int position) {
-
                 if (model.getMsgUser().equals(phone)) {
-
-
                     viewHolder.rightText.setText(model.getMsgText());
-
                     viewHolder.rightText.setVisibility(View.VISIBLE);
                     viewHolder.leftText.setVisibility(View.GONE);
                 }
                 else {
-                    viewHolder.leftText.setText(model.getMsgText());
-
+                    if(model.getMsgText().equals("")){
+                        viewHolder.leftText.setText("This is a great question, please write us on firstloveyourself1999@gmail.com");
+                    } else {
+                        viewHolder.leftText.setText(model.getMsgText());
+                    }
                     viewHolder.rightText.setVisibility(View.GONE);
                     viewHolder.leftText.setVisibility(View.VISIBLE);
                 }
@@ -187,7 +181,6 @@ public class ContactUs extends AppCompatActivity implements AIListener{
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
                 super.onItemRangeInserted(positionStart, itemCount);
-
                 int msgCount = adapter.getItemCount();
                 int lastVisiblePosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
 
@@ -228,20 +221,13 @@ public class ContactUs extends AppCompatActivity implements AIListener{
 
     @Override
     public void onResult(ai.api.model.AIResponse response) {
-
-
         Result result = response.getResult();
-
         String message = result.getResolvedQuery();
-        ChatMessage chatMessage0 = new ChatMessage(message, "user");
+        ChatMessage chatMessage0 = new ChatMessage(message, phone);
         ref.child("chat").push().setValue(chatMessage0);
-
-
         String reply = result.getFulfillment().getSpeech();
         ChatMessage chatMessage = new ChatMessage(reply, "bot");
         ref.child("chat").push().setValue(chatMessage);
-
-
     }
 
     @Override
