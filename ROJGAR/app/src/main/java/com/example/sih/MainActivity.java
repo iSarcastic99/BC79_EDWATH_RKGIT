@@ -171,12 +171,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.contact_us:
-                String recipient = "firstloveyourself1999@gmail.com";
-                String subject = "Related to Rojgar App";
-                Intent intent4 = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
-                intent4.putExtra(Intent.EXTRA_EMAIL, new String[]{recipient});
-                intent4.putExtra(Intent.EXTRA_SUBJECT, subject);
-                startActivity(intent4);
+                Intent intent = new Intent(MainActivity.this, ContactUs.class);
+                startActivity(intent);
                 return true;
 
             case R.id.go_to_profile:
