@@ -2,6 +2,7 @@ package com.example.sih;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -42,14 +43,17 @@ public class ContactUs extends AppCompatActivity implements AIListener{
     EditText editText;
     RelativeLayout addBtn;
     DatabaseReference ref;
+    String phone, S;
     FirebaseRecyclerAdapter<ChatMessage,chat_rec> adapter;
     Boolean flagFab = true;
-
+    int i;
     private AIService aiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences preferences = getSharedPreferences(S, i);
+        phone = preferences.getString("Phone", "");
         setContentView(R.layout.activity_contact_us);
 
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},1);
@@ -86,9 +90,8 @@ public class ContactUs extends AppCompatActivity implements AIListener{
 
                 if (!message.equals("")) {
 
-                    ChatMessage chatMessage = new ChatMessage(message, "user");
+                    ChatMessage chatMessage = new ChatMessage(message, phone);
                     ref.child("chat").push().setValue(chatMessage);
-
                     aiRequest.setQuery(message);
                     new AsyncTask<AIRequest,Void,AIResponse>(){
 
