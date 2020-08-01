@@ -1,12 +1,8 @@
 package com.example.sih;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import androidx.appcompat.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
@@ -15,12 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,15 +20,10 @@ import ai.api.AIDataService;
 import ai.api.AIListener;
 import ai.api.AIServiceException;
 import ai.api.android.AIConfiguration;
-
 import ai.api.android.AIService;
-import ai.api.model.AIError;
 import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
 import ai.api.model.Result;
-import com.google.gson.JsonElement;
-import java.util.Map;
-
 
 public class ContactUs extends AppCompatActivity implements AIListener{
 
@@ -57,7 +44,7 @@ public class ContactUs extends AppCompatActivity implements AIListener{
         phone = preferences.getString("Phone", "");
         setContentView(R.layout.activity_contact_us);
 
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO},1);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
         recyclerView = findViewById(R.id.recyclerView);
         editText = findViewById(R.id.editText);
         addBtn = findViewById(R.id.addBtn);
@@ -78,23 +65,17 @@ public class ContactUs extends AppCompatActivity implements AIListener{
         aiService.setListener(this);
 
         final AIDataService aiDataService = new AIDataService(config);
-
         final AIRequest aiRequest = new AIRequest();
-
-
-
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String message = editText.getText().toString().trim();
-
                 if (!message.equals("")) {
-
                     ChatMessage chatMessage = new ChatMessage(message, phone);
                     ref.child("chat").push().setValue(chatMessage);
                     aiRequest.setQuery(message);
-                    new AsyncTask<AIRequest,Void,AIResponse>(){
+                    new AsyncTask<AIRequest, Void, AIResponse>() {
 
                         @Override
                         protected AIResponse doInBackground(AIRequest... aiRequests) {
@@ -106,6 +87,7 @@ public class ContactUs extends AppCompatActivity implements AIListener{
                             }
                             return null;
                         }
+
                         @Override
                         protected void onPostExecute(AIResponse response) {
                             if (response != null) {
@@ -116,8 +98,7 @@ public class ContactUs extends AppCompatActivity implements AIListener{
                             }
                         }
                     }.execute(aiRequest);
-                }
-                else {
+                } else {
                     aiService.startListening();
                 }
                 editText.setText("");
@@ -129,26 +110,13 @@ public class ContactUs extends AppCompatActivity implements AIListener{
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ImageView fab_img = findViewById(R.id.fab_img);
-              //  Bitmap img = BitmapFactory.decodeResource(getResources(),R.drawable.ic_send_white_24dp);
-             //   Bitmap img1 = BitmapFactory.decodeResource(getResources(),R.drawable.ic_mic_white_24dp);
-
-
-                if (s.toString().trim().length()!=0 && flagFab){
-                  //  ImageViewAnimatedChange(ContactUs.this,fab_img,img);
-                    flagFab=false;
-
+                if (s.toString().trim().length() != 0 && flagFab) {
+                    flagFab = false;
+                } else if (s.toString().trim().length() == 0) {
+                    flagFab = true;
                 }
-                else if (s.toString().trim().length()==0){
-                  //  ImageViewAnimatedChange(ContactUs.this,fab_img,img1);
-                    flagFab=true;
-
-                }
-
-
             }
 
             @Override
@@ -157,16 +125,15 @@ public class ContactUs extends AppCompatActivity implements AIListener{
             }
         });
 
-        adapter = new FirebaseRecyclerAdapter<ChatMessage, chat_rec>(ChatMessage.class,R.layout.msglist,chat_rec.class,ref.child("chat")) {
+        adapter = new FirebaseRecyclerAdapter<ChatMessage, chat_rec>(ChatMessage.class, R.layout.msglist, chat_rec.class, ref.child("chat")) {
             @Override
             protected void populateViewHolder(chat_rec viewHolder, ChatMessage model, int position) {
                 if (model.getMsgUser().equals(phone)) {
                     viewHolder.rightText.setText(model.getMsgText());
                     viewHolder.rightText.setVisibility(View.VISIBLE);
                     viewHolder.leftText.setVisibility(View.GONE);
-                }
-                else {
-                    if(model.getMsgText().equals("")){
+                } else {
+                    if (model.getMsgText().equals("")) {
                         viewHolder.leftText.setText("This is a great question, please write us on firstloveyourself1999@gmail.com");
                     } else {
                         viewHolder.leftText.setText(model.getMsgText());
@@ -183,41 +150,13 @@ public class ContactUs extends AppCompatActivity implements AIListener{
                 super.onItemRangeInserted(positionStart, itemCount);
                 int msgCount = adapter.getItemCount();
                 int lastVisiblePosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-
-                if (lastVisiblePosition == -1 ||
-                        (positionStart >= (msgCount - 1) &&
-                                lastVisiblePosition == (positionStart - 1))) {
+                if (lastVisiblePosition == -1 || (positionStart >= (msgCount - 1) && lastVisiblePosition == (positionStart - 1))) {
                     recyclerView.scrollToPosition(positionStart);
-
                 }
-
             }
         });
-
         recyclerView.setAdapter(adapter);
-
-
     }
-//    public void ImageViewAnimatedChange(Context c, final ImageView v, final Bitmap new_image) {
-//      //  final Animation anim_out = AnimationUtils.loadAnimation(c, R.anim.zoom_out);
-//     //   final Animation anim_in  = AnimationUtils.loadAnimation(c, R.anim.zoom_in);
-//        anim_out.setAnimationListener(new Animation.AnimationListener()
-//        {
-//            @Override public void onAnimationStart(Animation animation) {}
-//            @Override public void onAnimationRepeat(Animation animation) {}
-//            @Override public void onAnimationEnd(Animation animation)
-//            {
-//                v.setImageBitmap(new_image);
-//                anim_in.setAnimationListener(new Animation.AnimationListener() {
-//                    @Override public void onAnimationStart(Animation animation) {}
-//                    @Override public void onAnimationRepeat(Animation animation) {}
-//                    @Override public void onAnimationEnd(Animation animation) {}
-//                });
-//                v.startAnimation(anim_in);
-//            }
-//        });
-//        v.startAnimation(anim_out);
-//    }
 
     @Override
     public void onResult(ai.api.model.AIResponse response) {
