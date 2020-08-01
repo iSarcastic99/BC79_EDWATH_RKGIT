@@ -73,7 +73,7 @@ public class ContactUs extends AppCompatActivity implements AIListener{
                 String message = editText.getText().toString().trim();
                 if (!message.equals("")) {
                     ChatMessage chatMessage = new ChatMessage(message, phone);
-                    ref.child("chat").push().setValue(chatMessage);
+                    ref.child("Chatbot").child(phone).child("chat").push().setValue(chatMessage);
                     aiRequest.setQuery(message);
                     new AsyncTask<AIRequest, Void, AIResponse>() {
 
@@ -94,7 +94,7 @@ public class ContactUs extends AppCompatActivity implements AIListener{
                                 Result result = response.getResult();
                                 String reply = result.getFulfillment().getSpeech();
                                 ChatMessage chatMessage = new ChatMessage(reply, "bot");
-                                ref.child("chat").push().setValue(chatMessage);
+                                ref.child("Chatbot").child(phone).child("chat").push().setValue(chatMessage);
                             }
                         }
                     }.execute(aiRequest);
@@ -125,7 +125,7 @@ public class ContactUs extends AppCompatActivity implements AIListener{
             }
         });
 
-        adapter = new FirebaseRecyclerAdapter<ChatMessage, chat_rec>(ChatMessage.class, R.layout.msglist, chat_rec.class, ref.child("chat")) {
+        adapter = new FirebaseRecyclerAdapter<ChatMessage, chat_rec>(ChatMessage.class, R.layout.msglist, chat_rec.class, ref.child("Chatbot").child(phone).child("chat")) {
             @Override
             protected void populateViewHolder(chat_rec viewHolder, ChatMessage model, int position) {
                 if (model.getMsgUser().equals(phone)) {
@@ -134,7 +134,7 @@ public class ContactUs extends AppCompatActivity implements AIListener{
                     viewHolder.leftText.setVisibility(View.GONE);
                 } else {
                     if (model.getMsgText().equals("")) {
-                        viewHolder.leftText.setText("This is a great question, please write us on firstloveyourself1999@gmail.com");
+                        viewHolder.leftText.setText("This is a great question, please write us on firstloveyourself1999@gmail.com.");
                     } else {
                         viewHolder.leftText.setText(model.getMsgText());
                     }
@@ -163,10 +163,10 @@ public class ContactUs extends AppCompatActivity implements AIListener{
         Result result = response.getResult();
         String message = result.getResolvedQuery();
         ChatMessage chatMessage0 = new ChatMessage(message, phone);
-        ref.child("chat").push().setValue(chatMessage0);
+        ref.child("Chatbot").child(phone).child("chat").push().setValue(chatMessage0);
         String reply = result.getFulfillment().getSpeech();
         ChatMessage chatMessage = new ChatMessage(reply, "bot");
-        ref.child("chat").push().setValue(chatMessage);
+        ref.child("Chatbot").child(phone).child("chat").push().setValue(chatMessage);
     }
 
     @Override

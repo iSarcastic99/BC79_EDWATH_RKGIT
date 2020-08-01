@@ -1,10 +1,5 @@
 package com.example.sih;
 
-
-/**
- * Created by beast on 14/4/17.
- */
-
 public class ChatMessage {
 
     private String msgText;
