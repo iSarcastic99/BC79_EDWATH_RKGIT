@@ -22,7 +22,6 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".Registration.Favorite_Sectors" />
         <activity android:name=".Jobs.Job_Details" />
-        <activity android:name=".Profile.Premium" />
         <activity android:name=".PublishJob.jobsPublished" />
         <activity android:name=".PublishJob.jobDetails" />
         <activity android:name=".PublishJob.companyProof" />
