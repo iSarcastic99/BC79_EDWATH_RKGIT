@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,28 +13,53 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".jobDetails"></activity>
-        <activity android:name=".jobsPublished" />
-        <activity android:name=".companyProof" />
-        <activity android:name=".CreateYourJob" />
-        <activity android:name=".ContactUs"></activity>
         <activity android:name=".jobApply" />
+
         <activity android:name=".Job_Details" />
-        <activity android:name=".Update_Certificates" />
-        <activity android:name=".Change_Password" />
-        <activity android:name=".Profile" />
-        <activity android:name=".Language" />
-        <activity android:name=".Forgot_Password" />
-        <activity android:name=".Login" />
-        <activity android:name=".Rating" />
+        <activity android:name=".jobsPublished" />
+        <activity android:name=".jobDetails" />
+        <activity android:name=".companyProof" />
+
+
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1120892018817048~9802887224" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+        <activity android:name="Update_Certificates" />
+        <activity android:name="Change_Password" />
+        <activity android:name="Profile" />
+        <activity android:name="Language" />
+        <activity android:name="Forgot_Password" />
+        <activity android:name="Login" />
+        <activity android:name="Rating" />
         <activity android:name=".PhoneVerification" />
         <activity android:name=".Tenders" />
         <activity android:name=".Freelancing" />
         <activity android:name=".Government" />
-        <activity android:name=".Private" />
+        <activity android:name=".Non_Government" />
         <activity android:name=".Register2" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Register" />
+
+        <activity android:name=".CreateYourJob">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="com.example.sih"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,10 +67,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
