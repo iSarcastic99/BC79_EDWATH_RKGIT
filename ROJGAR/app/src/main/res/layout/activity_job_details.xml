@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="jobDetails">
+    tools:context=".PublishJob.jobDetails">
 
     <TextView
         android:id="@+id/textView1"
@@ -15,121 +15,117 @@
         android:textColor="#080009"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.07"
+        app:layout_constraintBottom_toTopOf="@id/scroll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/title"
-        android:layout_width="323dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="Job Title "
-        android:inputType="textPersonName"
-        android:shadowColor="#9C27B0"
-        app:layout_constraintVertical_bias="0.15"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorActive"
+        app:layout_constraintBottom_toTopOf="@id/button4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        app:layout_constraintVertical_bias="0.7">
 
-    <EditText
-        android:id="@+id/sector"
-        android:layout_width="323dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="Job Sector"
-        android:inputType="textPersonName"
-        android:shadowColor="#9C27B0"
-        app:layout_constraintVertical_bias="0.25"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/jobtype"
-        android:layout_width="323dp"
-        android:layout_height="43dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35"/>
+            <Spinner
+                android:id="@+id/jobtype"
+                android:layout_width="323dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
 
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="323dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="Job Description >30 characters"
-        android:inputType="textPersonName"
-        app:layout_constraintVertical_bias="0.45"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+            <EditText
+                android:id="@+id/qualification"
+                android:layout_width="323dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:hint="Qualification Required"
+                android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/skills"
-        android:layout_width="323dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="Skills Required (Skill1, Skill2, ..)"
-        app:layout_constraintVertical_bias="0.55"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="323dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:hint="Job Title "
+                android:inputType="textPersonName"
+                android:shadowColor="#9C27B0" />
 
-    <EditText
-        android:id="@+id/qualification"
-        android:layout_width="323dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="Qualification Required"
-        android:inputType="textPersonName"
-        app:layout_constraintVertical_bias="0.65"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+            <EditText
+                android:id="@+id/skills"
+                android:layout_width="323dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:hint="Skills Required (Skill1, Skill2, ..)"
+                android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/city"
-        android:layout_width="323dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="Reporting City"
-        android:inputType="textPersonName"
-        app:layout_constraintVertical_bias="0.75"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+            <EditText
+                android:id="@+id/sector"
+                android:layout_width="323dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:hint="Job Sector"
+                android:inputType="textPersonName"
+                android:shadowColor="#9C27B0" />
 
-    <EditText
-        android:id="@+id/salary"
-        android:layout_width="323dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="Salary PA (Optional)"
-        android:inputType="textPersonName"
-        android:shadowColor="#9C27B0"
-        app:layout_constraintVertical_bias="0.85"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="323dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:hint="Job Description >30 characters"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/salary"
+                android:layout_width="323dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:hint="Salary PA (Optional)"
+                android:inputType="textPersonName"
+                android:shadowColor="#9C27B0" />
+
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="323dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:hint="Reporting City"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
+        android:background="@drawable/ic_sih_button_bg"
         android:text="Upload and Post"
         android:textColor="#FFFFFF"
         app:layout_constraintVertical_bias="0.97"
