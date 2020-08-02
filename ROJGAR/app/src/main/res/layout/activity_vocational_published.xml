@@ -6,30 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".PublishJob.jobsPublished">
 
-    <TextView
-        android:id="@+id/jobName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:fontFamily="@font/abril_fatface"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/jobDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/companyName" />
-
-
     <Button
         android:id="@+id/createJob"
         android:layout_width="wrap_content"
@@ -37,7 +13,7 @@
         android:layout_gravity="center"
         android:background="@drawable/feedback_bg"
         android:fadingEdge="vertical"
-        android:text="Create Job"
+        android:text="Post Job"
         android:textColor="#ffffff"
         android:textSize="18sp"
         android:layout_marginTop="48dp"

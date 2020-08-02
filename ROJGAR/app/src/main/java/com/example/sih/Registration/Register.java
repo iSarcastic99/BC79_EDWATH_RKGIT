@@ -134,7 +134,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onVerificationFailed(FirebaseException e) {
-                if(check.equals(getResources().getString(R.string.english))){
+                if(!check.equals(getResources().getString(R.string.english))){
                     TPhone.setError(getResources().getString(R.string.error1));
                 } else {
                     TPhone.setError("Error: "+e.getMessage());

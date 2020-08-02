@@ -22,39 +22,37 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class jobsPublished extends AppCompatActivity {
+public class VocationalPublished extends AppCompatActivity {
 
 
-    private TextView companyName, companyLocation, status;
+    private TextView status;
     Button createJob;
     DatabaseReference reff;
     RecyclerView recyclerView;
-    ArrayList<jobPost> list;
-    jAdapter adapter;
+    ArrayList<vocationalPost> list;
+    vAdapter adapter;
     int i, j;
     String phone, S, M, check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jobs_published);
+        setContentView(R.layout.activity_vocational_published);
         SharedPreferences preferences1 = getSharedPreferences(S,i);
         phone = preferences1.getString("Phone","");
         SharedPreferences preferences2 = getSharedPreferences(M,j);
         check = preferences2.getString("Lang","Eng");
-        companyName = findViewById(R.id.companyName);
-        companyLocation = findViewById(R.id.companyLocation);
         createJob = findViewById(R.id.createJob);
         status = findViewById(R.id.status);
         recyclerView = findViewById(R.id.jobs);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        list = new ArrayList<jobPost>();
+        list = new ArrayList<vocationalPost>();
 
         if(!check.equals(getResources().getString(R.string.english))){
             createJob.setText("अपनी नोकरी बनाओ");
         }
 
-        reff = FirebaseDatabase.getInstance().getReference().child("Job Post");
+        reff = FirebaseDatabase.getInstance().getReference().child("Atmanirbhar");
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -76,60 +74,32 @@ public class jobsPublished extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 if(check.equals(getResources().getString(R.string.english))) {
-                    Toast.makeText(jobsPublished.this, "Something went wrong", Toast.LENGTH_LONG).show();
+                    Toast.makeText(VocationalPublished.this, "Something went wrong", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(jobsPublished.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VocationalPublished.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        reff = FirebaseDatabase.getInstance().getReference().child("Company Representative Details").child(phone);
-        reff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                try {
-
-                    String name = dataSnapshot.child("cname").getValue().toString();
-                    String location = dataSnapshot.child("cloc").getValue().toString();
-                    companyName.setText(name);
-                    companyLocation.setText(location);
-
-                } catch (Exception e){
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                if(check.equals(getResources().getString(R.string.english))) {
-                    Toast.makeText(jobsPublished.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(jobsPublished.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        reff = FirebaseDatabase.getInstance().getReference().child("Job Post").child(phone);
+        reff = FirebaseDatabase.getInstance().getReference().child("Atmanirbhar").child(phone);
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 //                list = new ArrayList<jobPost>();
                 for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                    jobPost j = dataSnapshot1.getValue(jobPost.class);
-                    list.add(j);
+                    vocationalPost v = dataSnapshot1.getValue(vocationalPost.class);
+                    list.add(v);
                 }
-                adapter = new jAdapter(jobsPublished.this,list);
+                adapter = new vAdapter(VocationalPublished.this, list);
                 recyclerView.setAdapter(adapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 if(check.equals(getResources().getString(R.string.english))) {
-                    Toast.makeText(jobsPublished.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
+                    Toast.makeText(VocationalPublished.this, getResources().getString(R.string.error), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(jobsPublished.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VocationalPublished.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -137,7 +107,7 @@ public class jobsPublished extends AppCompatActivity {
         createJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(jobsPublished.this, jobDetails.class);
+                Intent intent = new Intent(VocationalPublished.this, jobDetails.class);
                 startActivity(intent);
             }
         });
