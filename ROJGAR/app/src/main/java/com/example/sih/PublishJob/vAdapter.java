@@ -33,7 +33,8 @@ public class vAdapter extends RecyclerView.Adapter<vAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(posts.get(position).getJobName());
         holder.description.setText(posts.get(position).getDescription());
-        holder.experience.setText(posts.get(position).getDays());
+        holder.duration.setText(posts.get(position).getDays());
+        holder.contact.setText(posts.get(position).getPhone());
     }
 
     @Override
@@ -43,15 +44,15 @@ public class vAdapter extends RecyclerView.Adapter<vAdapter.MyViewHolder> {
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView title, description, experience, city, email;
+        TextView title, description, duration, contact;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
             description = itemView.findViewById(R.id.desc);
-            experience = itemView.findViewById(R.id.exp);
-            city = itemView.findViewById(R.id.city);
-            email = itemView.findViewById(R.id.email);
+            duration = itemView.findViewById(R.id.time);
+            contact = itemView.findViewById(R.id.contact);
+
         }
     }
 

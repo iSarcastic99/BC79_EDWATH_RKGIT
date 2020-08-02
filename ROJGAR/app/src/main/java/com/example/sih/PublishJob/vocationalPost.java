@@ -4,39 +4,47 @@ public class vocationalPost {
     private String JobName;
     private String Description;
     private String Days;
+    private String Phone;
 
-    public vocationalPost(){
-
+    public vocationalPost() {
     }
 
-    public vocationalPost(String JobName, String Description, String Days) {
-        this.JobName = JobName;
-        this.Description = Description;
-        this.Days = Days;
+    public vocationalPost(String jobName, String description, String days, String phone) {
+        JobName = jobName;
+        Description = description;
+        Days = days;
+        Phone = phone;
     }
 
     public String getJobName() {
         return JobName;
     }
 
-    public void setJobName(String JobName) {
-        this.JobName = JobName;
+    public void setJobName(String jobName) {
+        JobName = jobName;
     }
 
     public String getDescription() {
         return Description;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setDescription(String description) {
+        Description = description;
     }
 
     public String getDays() {
         return Days;
     }
 
-    public void setDays(String Days) {
-        this.Days = Days;
+    public void setDays(String days) {
+        Days = days;
     }
 
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
 }
