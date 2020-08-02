@@ -78,8 +78,6 @@ public class VocationalAdapter extends RecyclerView.Adapter<VocationalAdapter.My
             };
             thread.start();
             final String phone = details.get(position).getPhone();
-            Toast.makeText(context, phone, Toast.LENGTH_SHORT).show();
-//            Picasso.get().load(details.get(position).getCompany_logo()).into(holder.company_logo);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
@@ -91,7 +89,7 @@ public class VocationalAdapter extends RecyclerView.Adapter<VocationalAdapter.My
                             String[] ph = phone.split(": ");
                             String Username = snapshot.child(ph[1]).child("Name").getValue().toString();
                             Intent intent = new Intent(context, com.example.sih.chatApp.Chat.class);
-                            intent.putExtra("Phone", phone);
+                            intent.putExtra("Phone", ph[1]);
                             intent.putExtra("Username", Username);
                             view.getContext().startActivity(intent);
                         } catch (Exception e) {
