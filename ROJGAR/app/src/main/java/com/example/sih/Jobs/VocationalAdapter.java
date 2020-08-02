@@ -85,20 +85,14 @@ public class VocationalAdapter extends RecyclerView.Adapter<VocationalAdapter.My
                     reff.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        try {
+
                             String[] ph = phone.split(": ");
                             String Username = snapshot.child(ph[1]).child("Name").getValue().toString();
                             Intent intent = new Intent(context, com.example.sih.chatApp.Chat.class);
                             intent.putExtra("Phone", ph[1]);
                             intent.putExtra("Username", Username);
                             view.getContext().startActivity(intent);
-                        } catch (Exception e) {
-                            if(check.equals("Eng")){
-                                Toast.makeText(context, "This user is not present over chat platform", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(context, "यह उपयोगकर्ता चैट प्लेटफॉर्म पर मौजूद नहीं है", Toast.LENGTH_SHORT).show();
-                            }
-                        }
+
                     }
 
                         @Override
