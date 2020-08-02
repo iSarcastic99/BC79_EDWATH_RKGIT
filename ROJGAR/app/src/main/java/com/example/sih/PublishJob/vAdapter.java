@@ -13,12 +13,12 @@ import com.example.sih.R;
 
 import java.util.ArrayList;
 
-public class jAdapter extends RecyclerView.Adapter<jAdapter.MyViewHolder> {
+public class vAdapter extends RecyclerView.Adapter<vAdapter.MyViewHolder> {
 
     Context context;
-    ArrayList<jobPost> posts;
+    ArrayList<vocationalPost> posts;
 
-    public jAdapter(Context c, ArrayList<jobPost> j){
+    public vAdapter(Context c, ArrayList<vocationalPost> j){
         context = c;
         posts = j;
     }
@@ -31,11 +31,9 @@ public class jAdapter extends RecyclerView.Adapter<jAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(posts.get(position).getTitle());
+        holder.title.setText(posts.get(position).getJobName());
         holder.description.setText(posts.get(position).getDescription());
-        holder.experience.setText(posts.get(position).getExperience());
-        holder.city.setText(posts.get(position).getCity());
-        holder.email.setText(posts.get(position).getEmail());
+        holder.experience.setText(posts.get(position).getDays());
     }
 
     @Override
