@@ -14,7 +14,7 @@
                 <item
                     android:id="@+id/government"
                     android:title="                  Government Jobs"
-                    android:textColor="#2f0739"/>
+                    android:textColor="#2f0739" />
                 <item
                     android:id="@+id/non_government"
                     android:title="                  Non-Government Jobs"
@@ -43,7 +43,8 @@
                 <item
                     android:id="@+id/premium"
                     android:title="                  Get Premium"
-                    android:textColor="#2f0739"/>
+                    android:textColor="#2f0739"
+                    android:visible="false"/>
                 <item
                     android:id="@+id/chat"
                     android:title="                  Build Your Connections"

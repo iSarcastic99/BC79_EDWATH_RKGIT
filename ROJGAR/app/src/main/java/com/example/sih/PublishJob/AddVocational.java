@@ -37,12 +37,12 @@ public class AddVocational extends AppCompatActivity {
         Post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(JobName.getText().toString().equals("") || Description.getText().toString().equals("") || NumberOfDays.getText().toString().equals("" )){
+                if(JobName.getText().toString().equals("") || Description.getText().toString().equals("") || NumberOfDays.getText().toString().equals("")){
                     Toast.makeText(AddVocational.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
                 } else {
-                    reff.child("Atmanirbhar").child(phone).child("JobName").setValue(JobName.getText().toString());
-                    reff.child("Atmanirbhar").child(phone).child("Description").setValue(Description.getText().toString());
-                    reff.child("Atmanirbhar").child(phone).child("Days").setValue(NumberOfDays.getText().toString());
+                    reff.child("Atmanirbhar").child(phone).child("JobName").setValue(JobName.getText().toString().trim());
+                    reff.child("Atmanirbhar").child(phone).child("Description").setValue(Description.getText().toString().trim());
+                    reff.child("Atmanirbhar").child(phone).child("Days").setValue(NumberOfDays.getText().toString().trim());
                     reff.child("Atmanirbhar").child(phone).child("Phone").setValue(phone);
                     Toast.makeText(AddVocational.this, "Job added successully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AddVocational.this, MainActivity.class);

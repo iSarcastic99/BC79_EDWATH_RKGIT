@@ -21,16 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/companyLocation" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/jobs"
-        android:layout_width="match_parent"
-        android:layout_height="345dp"
-        android:scrollbarStyle="insideInset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
@@ -40,5 +30,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createJob" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/jobs"
+        android:layout_width="match_parent"
+        android:layout_height="345dp"
+        android:scrollbarStyle="insideInset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
