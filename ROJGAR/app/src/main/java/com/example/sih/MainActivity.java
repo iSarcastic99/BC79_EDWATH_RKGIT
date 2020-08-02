@@ -574,10 +574,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.resources:
-                Intent redirectIntent = new Intent(Intent.ACTION_VIEW);
-                redirectIntent.addCategory(Intent.CATEGORY_BROWSABLE);
-                redirectIntent.setData(Uri.parse("https://swayam.gov.in/"));
-                startActivity(redirectIntent);
+                Intent intent9 = new Intent(MainActivity.this, com.example.sih.Jobs.studyprogress.class);
+                startActivity(intent9);
                 break;
 
             case R.id.atmanirbhar:
