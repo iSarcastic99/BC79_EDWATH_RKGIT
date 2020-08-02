@@ -7,7 +7,7 @@
     tools:context=".PublishJob.jobsPublished">
 
     <TextView
-        android:id="@+id/jobName"
+        android:id="@+id/companyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -20,7 +20,7 @@
 
 
     <TextView
-        android:id="@+id/jobDescription"
+        android:id="@+id/companyLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
