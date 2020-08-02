@@ -7,20 +7,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.sih.chatApp.ContactUs">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="10dp"
+        android:paddingBottom="50dp"
         android:clipToPadding="false"
         android:background="#f4f6f7"
         />
-    <ImageView
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_sih_banner_chatbot"
-        android:layout_marginStart="20dp"/>
 
 
     <RelativeLayout

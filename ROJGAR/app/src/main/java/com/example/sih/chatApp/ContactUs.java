@@ -49,10 +49,6 @@ public class ContactUs extends AppCompatActivity implements AIListener{
         SharedPreferences preferences1 = getSharedPreferences(M, j);
         check = preferences1.getString("Lang", "Eng");
         setContentView(R.layout.activity_contact_us2);
-        Title = findViewById(R.id.title);
-        if(check.equals("Hin")){
-            Title.setText("मैं एक चैटबॉट हूं, मैं यहां आपकी सहायता के लिए हूं।");
-        }
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
         recyclerView = findViewById(R.id.recyclerView);
         editText = findViewById(R.id.editText);
