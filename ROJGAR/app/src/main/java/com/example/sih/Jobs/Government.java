@@ -27,7 +27,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.sih.MainActivity;
 import com.example.sih.Profile.Profile;
 import com.example.sih.R;
 import com.example.sih.Profile.Rating;
@@ -88,7 +87,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         activity = preferences2.getString("Activity","");
         domain = preferences.getString("Domain", "");
         SharedPreferences preferences3 = getSharedPreferences(C,d);
-        Relation = preferences3.getString("Relation", "");
+        Relation = preferences3.getString("govRelation", "");
         setContentView(R.layout.activity_government);
         gov_jobs = findViewById(R.id.gov_jobs);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);

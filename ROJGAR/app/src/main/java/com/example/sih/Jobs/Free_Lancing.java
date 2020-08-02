@@ -67,7 +67,7 @@ public class Free_Lancing extends AppCompatActivity implements NavigationView.On
     DatabaseReference reff, reff1, reff2, reff3, reff4, reff5, reff6;
     RecyclerView freelance;
     ArrayList<data_in_cardview> details;
-    gov_adapter govAdapter;
+    freelance_adapter govAdapter;
     ProgressDialog pd;
     AdView mAdView;
     int size, k;
@@ -88,7 +88,7 @@ public class Free_Lancing extends AppCompatActivity implements NavigationView.On
         activity = preferences2.getString("Activity","");
         domain = preferences.getString("Domain", "");
         SharedPreferences preferences3 = getSharedPreferences(C,d);
-        Relation = preferences3.getString("Relation", "");
+        Relation = preferences3.getString("freelanceRelation", "");
         setContentView(R.layout.activity_free__lancing);
         freelance = findViewById(R.id.freelance);
 
@@ -182,7 +182,7 @@ public class Free_Lancing extends AppCompatActivity implements NavigationView.On
 
                                 data_in_cardview d = snapshot.getValue(data_in_cardview.class);
                                 details.add(d);
-                                govAdapter = new gov_adapter(Free_Lancing.this, details);
+                                govAdapter = new freelance_adapter(Free_Lancing.this, details);
                                 freelance.setAdapter(govAdapter);
 
                             }
@@ -227,7 +227,7 @@ public class Free_Lancing extends AppCompatActivity implements NavigationView.On
 
                                 data_in_cardview d = snapshot.getValue(data_in_cardview.class);
                                 details.add(d);
-                                govAdapter = new gov_adapter(Free_Lancing.this, details);
+                                govAdapter = new freelance_adapter(Free_Lancing.this, details);
                                 freelance.setAdapter(govAdapter);
 
                             }
@@ -274,7 +274,7 @@ public class Free_Lancing extends AppCompatActivity implements NavigationView.On
                                 data_in_cardview d = snapshot.getValue(data_in_cardview.class);
                                 if (!(subDomain.equals(domain))) {
                                     details.add(d);
-                                    govAdapter = new gov_adapter(Free_Lancing.this, details);
+                                    govAdapter = new freelance_adapter(Free_Lancing.this, details);
                                     freelance.setAdapter(govAdapter);
                                 }
 

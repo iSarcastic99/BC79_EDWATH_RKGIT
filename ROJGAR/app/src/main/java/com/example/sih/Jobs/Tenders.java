@@ -65,7 +65,7 @@ public class Tenders extends AppCompatActivity implements NavigationView.OnNavig
     DatabaseReference reff, reff1, reff2, reff3, reff4, reff5, reff6;
     RecyclerView tenders;
     ArrayList<data_in_cardview> details;
-    gov_adapter govAdapter;
+    tender_adapter govAdapter;
     ProgressDialog pd;
     AdView mAdView;
     int size, k;
@@ -86,7 +86,7 @@ public class Tenders extends AppCompatActivity implements NavigationView.OnNavig
         activity = preferences2.getString("Activity","");
         domain = preferences.getString("Domain", "");
         SharedPreferences preferences3 = getSharedPreferences(C,d);
-        Relation = preferences3.getString("Relation", "");
+        Relation = preferences3.getString("tenderRelation", "");
         setContentView(R.layout.activity_tenders);
         tenders = findViewById(R.id.tenders);
 
@@ -180,7 +180,7 @@ public class Tenders extends AppCompatActivity implements NavigationView.OnNavig
 
                                 data_in_cardview d = snapshot.getValue(data_in_cardview.class);
                                 details.add(d);
-                                govAdapter = new gov_adapter(Tenders.this, details);
+                                govAdapter = new tender_adapter(Tenders.this, details);
                                 tenders.setAdapter(govAdapter);
 
                             }
@@ -225,7 +225,7 @@ public class Tenders extends AppCompatActivity implements NavigationView.OnNavig
 
                                 data_in_cardview d = snapshot.getValue(data_in_cardview.class);
                                 details.add(d);
-                                govAdapter = new gov_adapter(Tenders.this, details);
+                                govAdapter = new tender_adapter(Tenders.this, details);
                                 tenders.setAdapter(govAdapter);
 
                             }
@@ -272,7 +272,7 @@ public class Tenders extends AppCompatActivity implements NavigationView.OnNavig
                                 data_in_cardview d = snapshot.getValue(data_in_cardview.class);
                                 if (!(subDomain.equals(domain))) {
                                     details.add(d);
-                                    govAdapter = new gov_adapter(Tenders.this, details);
+                                    govAdapter = new tender_adapter(Tenders.this, details);
                                     tenders.setAdapter(govAdapter);
                                 }
 
