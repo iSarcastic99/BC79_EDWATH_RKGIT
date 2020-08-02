@@ -323,10 +323,7 @@ public class User_List extends AppCompatActivity implements NavigationView.OnNav
                 Intent intent5 = new Intent(User_List.this, Tenders.class);
                 startActivity(intent5);
                 break;
-            case R.id.premium:
-                Intent intent2 = new Intent(User_List.this, com.example.sih.Profile.Premium.class);
-                startActivity(intent2);
-                break;
+
             case R.id.chat:
                 Intent intent6 = new Intent(User_List.this, com.example.sih.chatApp.User_List.class);
                 startActivity(intent6);

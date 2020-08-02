@@ -27,13 +27,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.sih.MainActivity;
 import com.example.sih.Profile.Profile;
 import com.example.sih.R;
 import com.example.sih.Profile.Rating;
 import com.example.sih.Registration.Favorite_Sectors;
 import com.example.sih.Registration.Login;
+import com.example.sih.chatApp.ContactUs;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -63,7 +63,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
     StorageReference mStorageReference;
     ActionBarDrawerToggle t;
     Menu menu1, menu2;
-    MenuItem Gov, Non_Gov, Tender, Free_Lancing, GetPremium, chat, topJobs, publishJob, Jobs, Features, Connection, Top_Jobs, Publish;
+    MenuItem Gov, Non_Gov, Tender, Free_Lancing, GetPremium, chat, Resources, topJobs, publishJob, Jobs, Features, Connection, Top_Jobs, Publish;
     Boolean isRegistered = false;
     DatabaseReference reff, reff1, reff2, reff3, reff4, reff5, reff6;
     RecyclerView gov_jobs;
@@ -329,6 +329,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         publishJob = menu2.findItem(R.id.publish);
         Jobs = menu2.findItem(R.id.title1);
         Features = menu2.findItem(R.id.title2);
+        Resources = menu2.findItem(R.id.resources);
         Top_Jobs = menu2.findItem(R.id.topJobs);
         Connection = menu2.findItem(R.id.chat);
         Publish = menu2.findItem(R.id.publish);
@@ -464,10 +465,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                 Intent intent5 = new Intent(Government.this, Favorite_Sectors.class);
                 startActivity(intent5);
                 break;
-            case R.id.premium:
-                Intent intent2 = new Intent(Government.this, com.example.sih.Profile.Premium.class);
-                startActivity(intent2);
-                break;
+
             case R.id.chat:
                 Intent intent6 = new Intent(Government.this, com.example.sih.chatApp.User_List.class);
                 startActivity(intent6);
@@ -485,6 +483,13 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
             case R.id.topJobs:
                 Intent intent8 = new Intent(Government.this, com.example.sih.Jobs.topJobsFragment.class);
                 startActivity(intent8);
+                break;
+
+            case R.id.resources:
+                Intent redirectIntent = new Intent(Intent.ACTION_VIEW);
+                redirectIntent.addCategory(Intent.CATEGORY_BROWSABLE);
+                redirectIntent.setData(Uri.parse("https://swayam.gov.in/"));
+                startActivity(redirectIntent);
                 break;
 
         }
@@ -535,11 +540,10 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                 Intent rateIntent = new Intent(Government.this, Rating.class);
                 startActivity(rateIntent);
                 return true;
+
             case R.id.contact_us:
-                String recipient = "firstloveyourself1999@gmail.com";
-                Intent intent4 = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"));
-                intent4.putExtra(Intent.EXTRA_EMAIL, new String[]{recipient});
-                startActivity(intent4);
+                Intent intent = new Intent(Government.this, ContactUs.class);
+                startActivity(intent);
                 return true;
 
             default:
@@ -623,6 +627,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         Days.setText(days + " दिन शेष");
         Jobs.setTitle("           नौकरी क्षेत्र");
         Features.setTitle("           अधिक सुविधाएं");
+        Resources.setTitle("                  अध्ययन के संसाधन");
     }
     public void NavEng(){
         Gov.setTitle("                  Government Jobs");
@@ -633,6 +638,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         Publish.setTitle("                  Publish Your Job");
         Top_Jobs.setTitle("                  Top Jobs");
         Connection.setTitle("                  Build Your Connections");
+        Resources.setTitle("                  Study Resources");
         Premium.setText("Premium");
         if(days.equals("1")){
             Days.setText(days + " day remaining");

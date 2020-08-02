@@ -137,21 +137,21 @@ public class Job_Details extends AppCompatActivity {
             }
         }
 
-        roadmap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent roadmapIntent = new Intent(Job_Details.this, progressTracker.class);
-                startActivity(roadmapIntent);
-                SharedPreferences.Editor editor = getSharedPreferences(J, x).edit();
-                editor.putString("domainType", domainType);
-                editor.putString("jobCategory", jobCategory);
-                editor.putString("jobReference", jobReference);
-                editor.putString("TAG", TAG);
-                editor.apply();
-
-            }
-        });
+//        roadmap.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent roadmapIntent = new Intent(Job_Details.this, progressTracker.class);
+//                startActivity(roadmapIntent);
+//                SharedPreferences.Editor editor = getSharedPreferences(J, x).edit();
+//                editor.putString("domainType", domainType);
+//                editor.putString("jobCategory", jobCategory);
+//                editor.putString("jobReference", jobReference);
+//                editor.putString("TAG", TAG);
+//                editor.apply();
+//
+//            }
+//        });
 
         apply.setOnClickListener(new View.OnClickListener() {
             @Override

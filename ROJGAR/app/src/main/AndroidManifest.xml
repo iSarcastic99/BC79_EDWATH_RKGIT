@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".chatApp.ContactUs"></activity>
         <activity android:name=".Jobs.jobApply" />
         <activity
             android:name=".Jobs.topJobs"
