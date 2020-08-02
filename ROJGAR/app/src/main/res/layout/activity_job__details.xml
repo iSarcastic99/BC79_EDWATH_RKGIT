@@ -16,8 +16,8 @@
         android:textColor="#080009"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintVertical_bias="0.5"
-        app:layout_constraintBottom_toTopOf="@id/llayout"
+        app:layout_constraintVertical_bias="0.03"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,9 +29,10 @@
             android:orientation="vertical"
             android:background="@color/colorActive"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView1"
             app:layout_constraintBottom_toTopOf="@id/apply"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.9">
 
             <TextView
                 android:id="@+id/job_post"
