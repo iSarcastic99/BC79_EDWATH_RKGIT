@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.sih.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -33,10 +34,11 @@ public class ContactUs extends AppCompatActivity implements AIListener{
     EditText editText;
     RelativeLayout addBtn;
     DatabaseReference ref;
-    String phone, S;
+    String phone, S, M, check;
+    TextView Title;
     FirebaseRecyclerAdapter<ChatMessage,chat_rec> adapter;
     Boolean flagFab = true;
-    int i;
+    int i, j;
     private AIService aiService;
 
     @Override
@@ -44,8 +46,13 @@ public class ContactUs extends AppCompatActivity implements AIListener{
         super.onCreate(savedInstanceState);
         SharedPreferences preferences = getSharedPreferences(S, i);
         phone = preferences.getString("Phone", "");
+        SharedPreferences preferences1 = getSharedPreferences(M, j);
+        check = preferences1.getString("Lang", "Eng");
         setContentView(R.layout.activity_contact_us2);
-
+        Title = findViewById(R.id.title);
+        if(check.equals("Hin")){
+            Title.setText("मैं एक चैटबॉट हूं, मैं यहां आपकी सहायता के लिए हूं।");
+        }
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
         recyclerView = findViewById(R.id.recyclerView);
         editText = findViewById(R.id.editText);
