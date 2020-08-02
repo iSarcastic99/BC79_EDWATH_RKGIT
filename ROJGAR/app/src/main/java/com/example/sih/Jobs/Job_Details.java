@@ -35,14 +35,15 @@ import java.io.InputStream;
 public class Job_Details extends AppCompatActivity {
 
     private TextView job_post, company_name, company_location, job_details, salaryLabel, salary, sectorLabel, sector, jobDescriptionLabel, jobDescription;
-    DatabaseReference reff;
-    int k, i, x;
+    DatabaseReference reff, reff1;
+    int k, i, x, y, d, size;
     String M, J, C, check, phone, activity, S, jobReference, jobCategory, domainType, post, name, location, Salary, Sector, jobDesc, TAG;
     Translate translate;
     Firebase firebase;
-    Button apply;
+    Button FavButton, roadmap, apply;
     Intent intent;
     ProgressDialog pd;
+    Boolean isStored = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,46 @@ public class Job_Details extends AppCompatActivity {
         pd = new ProgressDialog(Job_Details.this);
         pd.setMessage("Getting Job Details");
         pd.show();
+        if(!check.equals(getResources().getString(R.string.english))){
+            FavButton.setText("ड्रीमजॉब में जोड़ें");
+        }
+
+//        FavButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                try {
+//                    reff1 = FirebaseDatabase.getInstance().getReference().child("Users").child(phone).child("Dream Jobs");
+//                    reff1.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            long childCount = snapshot.getChildrenCount();
+//                                firebase.child(phone).child("Dream Jobs").child(domainType + " " + TAG + " " + jobCategory + " "+ jobReference).setValue(domainType + "-" + TAG + "-" + jobCategory + "-" + jobReference);
+//                                isStored = true;
+//                                if(check.equals(getResources().getString(R.string.english))) {
+//                                    Toast.makeText(Job_Details.this, "Saved to Dream Jobs", Toast.LENGTH_SHORT).show();
+//                                } else {
+//                                    Toast.makeText(Job_Details.this, "ड्रीमजॉब में जोड़ा गया", Toast.LENGTH_SHORT).show();
+//                                }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
+//                } catch (Exception e) {
+//
+//                    firebase.child(phone).child("Dream Jobs").child(domainType + " " + TAG + " " + jobCategory + " "+ jobReference).setValue(domainType + "-" + TAG + "-" + jobCategory + "-" + jobReference);
+//                    isStored = true;
+//                    if(check.equals(getResources().getString(R.string.english))) {
+//                        Toast.makeText(Job_Details.this, "Saved to Dream Jobs", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        Toast.makeText(Job_Details.this, "ड्रीमजॉब में जोड़ा गया", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//        });
 
         if (!check.equals(getResources().getString(R.string.english))){
             getTranslateService();
@@ -126,6 +167,18 @@ public class Job_Details extends AppCompatActivity {
 
             }
         });
+
+//        if (activity.equals("Main")){
+//
+//            roadmap.setVisibility(View.VISIBLE);
+//
+//        }
+
+//        else{
+//
+//            FavButton.setVisibility(View.VISIBLE);
+//
+//        }
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

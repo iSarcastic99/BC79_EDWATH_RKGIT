@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class gov_adapter extends RecyclerView.Adapter<gov_adapter.MyViewHolder> implements Filterable {
+public class freelance_adapter extends RecyclerView.Adapter<freelance_adapter.MyViewHolder> implements Filterable {
     Context context;
     ArrayList<data_in_cardview> details;
     ArrayList<data_in_cardview> fullDetails;
@@ -33,13 +33,13 @@ public class gov_adapter extends RecyclerView.Adapter<gov_adapter.MyViewHolder> 
     String check, C;
     int d;
 
-    public gov_adapter(Context c, ArrayList<data_in_cardview> d){
+    public freelance_adapter(Context c, ArrayList<data_in_cardview> d){
         context = c;
         details = d;
         fullDetails = new ArrayList<>(d);
     }
 
-    public gov_adapter(Government c, ArrayList<String> content) {
+    public freelance_adapter(Free_Lancing c, ArrayList<String> content) {
     }
 
     @NonNull
@@ -74,7 +74,7 @@ public class gov_adapter extends RecyclerView.Adapter<gov_adapter.MyViewHolder> 
                     view.getContext().startActivity(intent);
                     String Relation = details.get(position).getRelation();
                     SharedPreferences.Editor editor = context.getSharedPreferences(C,d).edit();
-                    editor.putString("govRelation", Relation);
+                    editor.putString("freelanceRelation", Relation);
                     editor.apply();
 
 

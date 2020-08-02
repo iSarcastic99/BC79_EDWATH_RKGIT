@@ -27,7 +27,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.sih.MainActivity;
 import com.example.sih.Profile.Profile;
 import com.example.sih.R;
 import com.example.sih.Profile.Rating;
@@ -88,7 +87,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         activity = preferences2.getString("Activity","");
         domain = preferences.getString("Domain", "");
         SharedPreferences preferences3 = getSharedPreferences(C,d);
-        Relation = preferences3.getString("Relation", "");
+        Relation = preferences3.getString("govRelation", "");
         setContentView(R.layout.activity_government);
         gov_jobs = findViewById(R.id.gov_jobs);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -163,6 +162,7 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
         pd.show();
 
         try {
+
             reff5 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child(Relation).child("Government");
 
             reff5.addValueEventListener(new ValueEventListener() {
@@ -208,98 +208,106 @@ public class Government extends AppCompatActivity implements NavigationView.OnNa
                 }
             });
 
-            reff2 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child("All Jobs").child("Government");
-
-            reff2.addValueEventListener(new ValueEventListener() {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                public void run() {
+                    reff2 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child("All Jobs").child("Government");
 
-                    size = (int) dataSnapshot.getChildrenCount();
+                    reff2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    for (int l = 0; l < size; l++) {
+                            size = (int) dataSnapshot.getChildrenCount();
 
-                        String i = Integer.toString(l);
-                        reff1 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child("All Jobs").child("Government").child(i);
-                        reff1.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (int l = 0; l < size; l++) {
 
-                                data_in_cardview d = snapshot.getValue(data_in_cardview.class);
-                                details.add(d);
-                                govAdapter = new gov_adapter(Government.this, details);
-                                gov_jobs.setAdapter(govAdapter);
+                                String i = Integer.toString(l);
+                                reff1 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child("All Jobs").child("Government").child(i);
+                                reff1.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                                        data_in_cardview d = snapshot.getValue(data_in_cardview.class);
+                                        details.add(d);
+                                        govAdapter = new gov_adapter(Government.this, details);
+                                        gov_jobs.setAdapter(govAdapter);
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        if(check.equals(getResources().getString(R.string.english))){
+                                            Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                if(check.equals(getResources().getString(R.string.english))){
-                                    Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
-                                }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            if(check.equals(getResources().getString(R.string.english))){
+                                Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
                             }
-                        });
-                    }
-                }
+                        }
+                    });
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    if(check.equals(getResources().getString(R.string.english))){
-                        Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+                    reff3 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("All Jobs").child("Government");
+                    reff3.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-            reff3 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("All Jobs").child("Government");
-            reff3.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            size = (int) dataSnapshot.getChildrenCount();
 
-                    size = (int) dataSnapshot.getChildrenCount();
+                            for (int k = 0; k < size; k++) {
 
-                    for (int k = 0; k < size; k++) {
+                                String i = Integer.toString(k);
+                                reff4 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("All Jobs").child("Government").child(i);
+                                reff4.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        String i = Integer.toString(k);
-                        reff4 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("All Jobs").child("Government").child(i);
-                        reff4.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String subDomain = snapshot.child("sub_domain").getValue().toString();
 
-                                String subDomain = snapshot.child("sub_domain").getValue().toString();
+                                        data_in_cardview d = snapshot.getValue(data_in_cardview.class);
+                                        if (!(subDomain.equals(domain))) {
+                                            details.add(d);
+                                            govAdapter = new gov_adapter(Government.this, details);
+                                            gov_jobs.setAdapter(govAdapter);
+                                        }
 
-                                data_in_cardview d = snapshot.getValue(data_in_cardview.class);
-                                if (!(subDomain.equals(domain))) {
-                                    details.add(d);
-                                    govAdapter = new gov_adapter(Government.this, details);
-                                    gov_jobs.setAdapter(govAdapter);
-                                }
+                                    }
 
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        if(check.equals(getResources().getString(R.string.english))){
+                                            Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                if(check.equals(getResources().getString(R.string.english))){
-                                    Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
-                                }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            if(check.equals(getResources().getString(R.string.english))){
+                                Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
                             }
-                        });
-                    }
+                        }
+                    });
                 }
+            }, 500);
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    if(check.equals(getResources().getString(R.string.english))){
-                        Toast.makeText(Government.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Government.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+
         } catch (Exception e) {
             e.printStackTrace();
         }

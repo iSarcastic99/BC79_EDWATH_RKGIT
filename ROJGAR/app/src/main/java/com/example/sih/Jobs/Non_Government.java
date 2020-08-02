@@ -65,7 +65,7 @@ public class Non_Government extends AppCompatActivity implements NavigationView.
     DatabaseReference reff, reff1, reff2, reff3, reff4, reff5, reff6;
     RecyclerView private_jobs;
     ArrayList<data_in_cardview> details;
-    gov_adapter govAdapter;
+    nonGov_adapter govAdapter;
     ProgressDialog pd;
     AdView mAdView;
     int size, k;
@@ -86,7 +86,7 @@ public class Non_Government extends AppCompatActivity implements NavigationView.
         activity = preferences2.getString("Activity","");
         domain = preferences.getString("Domain", "");
         SharedPreferences preferences3 = getSharedPreferences(C,d);
-        Relation = preferences3.getString("Relation", "");
+        Relation = preferences3.getString("nonGovRelation", "");
         setContentView(R.layout.activity_non__government);
         private_jobs = findViewById(R.id.private_jobs);
 
@@ -180,7 +180,7 @@ public class Non_Government extends AppCompatActivity implements NavigationView.
 
                                 data_in_cardview d = snapshot.getValue(data_in_cardview.class);
                                 details.add(d);
-                                govAdapter = new gov_adapter(Non_Government.this, details);
+                                govAdapter = new nonGov_adapter(Non_Government.this, details);
                                 private_jobs.setAdapter(govAdapter);
 
                             }
@@ -225,7 +225,7 @@ public class Non_Government extends AppCompatActivity implements NavigationView.
 
                                 data_in_cardview d = snapshot.getValue(data_in_cardview.class);
                                 details.add(d);
-                                govAdapter = new gov_adapter(Non_Government.this, details);
+                                govAdapter = new nonGov_adapter(Non_Government.this, details);
                                 private_jobs.setAdapter(govAdapter);
 
                             }
@@ -272,7 +272,7 @@ public class Non_Government extends AppCompatActivity implements NavigationView.
                                 data_in_cardview d = snapshot.getValue(data_in_cardview.class);
                                 if (!(subDomain.equals(domain))) {
                                     details.add(d);
-                                    govAdapter = new gov_adapter(Non_Government.this, details);
+                                    govAdapter = new nonGov_adapter(Non_Government.this, details);
                                     private_jobs.setAdapter(govAdapter);
                                 }
 
