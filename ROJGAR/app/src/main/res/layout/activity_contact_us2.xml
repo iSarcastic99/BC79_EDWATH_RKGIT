@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.sih.chatApp.ContactUs">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="10dp"
+        android:paddingBottom="50dp"
         android:clipToPadding="false"
         android:background="#f4f6f7"
 
