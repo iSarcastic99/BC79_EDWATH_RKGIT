@@ -36,7 +36,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cardCornerRadius="15dp"
-                        android:visibility="invisible"
+                        android:visibility="visible"
                         android:layout_marginBottom="125dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -69,12 +69,12 @@
                                 android:id="@+id/premium"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/ic_premium_banner" />
+                                android:background="@drawable/ic_sih_banner_swayam" />
                             <ImageView
                                 android:id="@+id/dreamJob"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/ic_dreamjob_banner2" />
+                                android:background="@drawable/ic_sih_banner_chatbot" />
                             <ImageView
                                 android:id="@+id/roadmap"
                                 android:layout_width="match_parent"
