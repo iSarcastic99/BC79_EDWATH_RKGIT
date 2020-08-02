@@ -25,6 +25,8 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.sih.Jobs.Atmanirbhar;
 import com.example.sih.Jobs.Free_Lancing;
 import com.example.sih.Jobs.Government;
 import com.example.sih.Jobs.Non_Government;
@@ -576,6 +578,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 redirectIntent.addCategory(Intent.CATEGORY_BROWSABLE);
                 redirectIntent.setData(Uri.parse("https://swayam.gov.in/"));
                 startActivity(redirectIntent);
+                break;
+
+            case R.id.atmanirbhar:
+                Intent atmaIntent = new Intent(MainActivity.this, Atmanirbhar.class);
+                atmaIntent.addCategory(Intent.CATEGORY_BROWSABLE);
+                startActivity(atmaIntent);
                 break;
 
         }

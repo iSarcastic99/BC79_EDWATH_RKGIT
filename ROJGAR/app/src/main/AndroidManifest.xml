@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PublishJob.VocationalPublished"></activity>
+        <activity android:name=".Jobs.Atmanirbhar"></activity>
+        <activity android:name=".PublishJob.VocationalPublished" />
         <activity android:name=".PublishJob.AddVocational" />
         <activity android:name=".chatApp.ContactUs" />
         <activity android:name=".Jobs.jobApply" />

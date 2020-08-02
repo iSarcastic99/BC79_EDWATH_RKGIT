@@ -61,6 +61,10 @@
                     android:id="@+id/resources"
                     android:title="                  Study Resources"
                     android:textColor="#2f0739"/>
+                <item
+                    android:id="@+id/atmanirbhar"
+                    android:title="                  Atmanirbhar"
+                    android:textColor="#2f0739"/>
             </menu>
         </item>
     </group>
