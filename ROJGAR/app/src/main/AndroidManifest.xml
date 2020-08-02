@@ -14,10 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Jobs.studyprogress"></activity>
-        <activity android:name=".Jobs.Atmanirbhar" />
         <activity android:name=".PublishJob.VocationalPublished" />
         <activity android:name=".PublishJob.AddVocational" />
         <activity android:name=".chatApp.ContactUs" />
+        <activity android:name=".Atmanirbhar.Atmanirbhar.ClientService"/>
+        <activity android:name=".Atmanirbhar.Atmanirbhar.Atmanirbhar"/>
+        <activity android:name=".Atmanirbhar.Atmanirbhar.VendorProduct"/>
+        <activity android:name=".Atmanirbhar.Atmanirbhar.VendorService"/>
+        <activity android:name=".Atmanirbhar.Atmanirbhar.ProductService"/>
+        <activity android:name=".Atmanirbhar.Atmanirbhar.ClientProduct"/>
         <activity android:name=".Jobs.jobApply" />
         <activity
             android:name=".Jobs.topJobs"

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Menu;
@@ -26,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.sih.Jobs.Atmanirbhar;
+import com.example.sih.Atmanirbhar.Atmanirbhar.Atmanirbhar;
 import com.example.sih.Jobs.Free_Lancing;
 import com.example.sih.Jobs.Government;
 import com.example.sih.Jobs.Non_Government;
@@ -577,13 +576,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent9 = new Intent(MainActivity.this, com.example.sih.Jobs.studyprogress.class);
                 startActivity(intent9);
                 break;
-
             case R.id.atmanirbhar:
-                Intent atmaIntent = new Intent(MainActivity.this, Atmanirbhar.class);
-                atmaIntent.addCategory(Intent.CATEGORY_BROWSABLE);
-                startActivity(atmaIntent);
+                Intent intent6 = new Intent(MainActivity.this, Atmanirbhar.class);
+                startActivity(intent6);
                 break;
-
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

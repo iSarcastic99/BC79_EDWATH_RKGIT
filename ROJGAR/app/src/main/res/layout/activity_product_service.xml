@@ -7,9 +7,10 @@
     tools:context=".Registration.Language">
 
     <TextView
+        android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Who are you?"
+        android:text="Who do you want?"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,11 +19,11 @@
         app:layout_constraintVertical_bias="0.10"/>
 
     <Button
-        android:id="@+id/buttonVendor"
+        android:id="@+id/buttonProduct"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textColor="#FFFFFF"
-        android:text="Vendor"
+        android:text="Product"
         android:background="@drawable/ic_sih_button_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,11 +32,11 @@
         app:layout_constraintVertical_bias="0.40"/>
 
     <Button
-        android:id="@+id/buttonClient"
+        android:id="@+id/buttonService"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:textColor="#FFFFFF"
-        android:text="Client"
+        android:text="Service"
         android:background="@drawable/ic_sih_button_bg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
