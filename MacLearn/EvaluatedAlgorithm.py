@@ -1,5 +1,5 @@
 from RecommenderMetrics import RecommenderMetrics
-from EvaluationData import EvaluationData
+
 
 class EvaluatedAlgorithm:
     
@@ -65,5 +65,3 @@ class EvaluatedAlgorithm:
     
     def GetAlgorithm(self):
         return self.algorithm
-    
-    

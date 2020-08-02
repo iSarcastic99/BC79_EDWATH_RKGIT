@@ -12,7 +12,7 @@ class EvaluationData:
         self.fullTrainSet = data.build_full_trainset()
         self.fullAntiTestSet = self.fullTrainSet.build_anti_testset()
         
-        #Building a 70/20 train/test split for measuring accuracy
+        #Building a 80/20 train/test split for measuring accuracy
         self.trainSet, self.testSet = train_test_split(data, test_size=.20, random_state=1)
         
         #Building a "leave one out" train/test split for evaluating top-N recommenders
