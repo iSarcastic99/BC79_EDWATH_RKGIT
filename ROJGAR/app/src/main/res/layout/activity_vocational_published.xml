@@ -402,18 +402,6 @@
             </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:id="@+id/add"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="Create More Jobs"
-            android:background="@drawable/button"
-            app:layout_constraintVertical_bias="0.9"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

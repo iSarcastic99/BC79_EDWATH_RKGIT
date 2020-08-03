@@ -17,7 +17,6 @@ public class Atmanirbhar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_atmanirbhar);
-
         Client = findViewById(R.id.buttonClient);
         Vendor = findViewById(R.id.buttonVendor);
 

@@ -58,7 +58,6 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
     DrawerLayout drawer;
     ImageView profile;
     CardView cd2, cd3, cd4, cd5;
-    Button Create;
     NavigationView navigationView;
     TextView JobTitle1, JobTitle2, JobTitle3, JobTitle4, JobTitle5;
     TextView JobDesc1, JobDesc2, JobDesc3, JobDesc4, JobDesc5;
@@ -100,8 +99,6 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
         cd3 = findViewById(R.id.job_card3);
         cd4 = findViewById(R.id.job_card4);
         cd5 = findViewById(R.id.job_card5);
-        Create = findViewById(R.id.add);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         navigationView = findViewById(R.id.nv);
         navigationView.setNavigationItemSelectedListener(this);
@@ -123,14 +120,6 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
             actionBar.setTitle("आपके पोस्ट");
         }
 
-        Create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(VocationalPublished.this, AddVocational.class);
-                startActivity(intent);
-            }
-        });
-
         reff1 = FirebaseDatabase.getInstance().getReference().child("Atmanirbhar");
         reff1.addValueEventListener(new ValueEventListener() {
             @Override
@@ -140,7 +129,13 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
                     JobDesc1.setText(snapshot.child(phone).child("1").child("Description").getValue().toString());
                     Days1.setText(snapshot.child(phone).child("1").child("Days").getValue().toString());
                 } catch(Exception e){
-                    //You have not posted any jobs yet
+                    if(check.equals("Eng")){
+                        Toast.makeText(VocationalPublished.this, "You have not published any job yet.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(VocationalPublished.this, "आपने अभी तक कोई नौकरी प्रकाशित नहीं की है", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
             }
 
