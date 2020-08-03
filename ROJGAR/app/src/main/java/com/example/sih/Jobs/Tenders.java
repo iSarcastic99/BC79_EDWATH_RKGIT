@@ -162,54 +162,9 @@ public class Tenders extends AppCompatActivity implements NavigationView.OnNavig
         pd.show();
 
         try {
-//            reff5 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child(Relation).child("Tender");
-//
-//            reff5.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                    size = (int) dataSnapshot.getChildrenCount();
-//
-//                    for (int l = 0; l < size; l++) {
-//
-//                        String i = Integer.toString(l);
-//                        reff6 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child(Relation).child("Tender").child(i);
-//                        reff6.addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                                data_in_cardview d = snapshot.getValue(data_in_cardview.class);
-//                                details.add(d);
-//                                govAdapter = new tender_adapter(Tenders.this, details);
-//                                tenders.setAdapter(govAdapter);
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancelled(@NonNull DatabaseError error) {
-//                                if(check.equals(getResources().getString(R.string.english))){
-//                                    Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
-//                                } else {
-//                                    Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
-//                                }
-//                            }
-//                        });
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//                    if(check.equals(getResources().getString(R.string.english))){
-//                        Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//            });
+            reff5 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child(Relation).child("Tender");
 
-            reff2 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child("All Jobs").child("Tender");
-
-            reff2.addValueEventListener(new ValueEventListener() {
+            reff5.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -218,8 +173,8 @@ public class Tenders extends AppCompatActivity implements NavigationView.OnNavig
                     for (int l = 0; l < size; l++) {
 
                         String i = Integer.toString(l);
-                        reff1 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child("All Jobs").child("Tender").child(i);
-                        reff1.addValueEventListener(new ValueEventListener() {
+                        reff6 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child(Relation).child("Tender").child(i);
+                        reff6.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -252,53 +207,103 @@ public class Tenders extends AppCompatActivity implements NavigationView.OnNavig
                 }
             });
 
-            reff3 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("Tender");
-            reff3.addValueEventListener(new ValueEventListener() {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                public void run() {
 
-                    size = (int) dataSnapshot.getChildrenCount();
+                    reff2 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child("All Jobs").child("Tender");
 
-                    for (int k = 0; k < size; k++) {
+                    reff2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        String i = Integer.toString(k);
-                        reff4 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("Tender").child(i);
-                        reff4.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            size = (int) dataSnapshot.getChildrenCount();
 
-                                String subDomain = snapshot.child("sub_domain").getValue().toString();
+                            for (int l = 0; l < size; l++) {
 
-                                data_in_cardview d = snapshot.getValue(data_in_cardview.class);
-                                if (!(subDomain.equals(domain))) {
-                                    details.add(d);
-                                    govAdapter = new tender_adapter(Tenders.this, details);
-                                    tenders.setAdapter(govAdapter);
-                                }
+                                String i = Integer.toString(l);
+                                reff1 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child(domain).child("All Jobs").child("Tender").child(i);
+                                reff1.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                                        data_in_cardview d = snapshot.getValue(data_in_cardview.class);
+                                        details.add(d);
+                                        govAdapter = new tender_adapter(Tenders.this, details);
+                                        tenders.setAdapter(govAdapter);
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        if(check.equals(getResources().getString(R.string.english))){
+                                            Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
                             }
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                if(check.equals(getResources().getString(R.string.english))){
-                                    Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
-                                }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            if(check.equals(getResources().getString(R.string.english))){
+                                Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
                             }
-                        });
-                    }
-                }
+                        }
+                    });
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    if(check.equals(getResources().getString(R.string.english))){
-                        Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
-                    }
+                    reff3 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("All Jobs").child("Tender");
+                    reff3.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            size = (int) dataSnapshot.getChildrenCount();
+
+                            for (int k = 0; k < size; k++) {
+
+                                String i = Integer.toString(k);
+                                reff4 = FirebaseDatabase.getInstance().getReference().child("Jobs Revolution").child("All Jobs").child("All Jobs").child("Tender").child(i);
+                                reff4.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                        data_in_cardview d = snapshot.getValue(data_in_cardview.class);
+                                        details.add(d);
+                                        govAdapter = new tender_adapter(Tenders.this, details);
+                                        tenders.setAdapter(govAdapter);
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        if(check.equals(getResources().getString(R.string.english))){
+                                            Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            if(check.equals(getResources().getString(R.string.english))){
+                                Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(Tenders.this, getResources().getString(R.string.check_internet1), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
                 }
-            });
+            }, 250);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

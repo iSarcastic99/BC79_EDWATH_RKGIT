@@ -1,9 +1,12 @@
 package com.example.sih.Atmanirbhar.Atmanirbhar;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sih.R;
@@ -66,30 +70,78 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
-                    reff = FirebaseDatabase.getInstance().getReference().child("Users");
-                    reff.addValueEventListener(new ValueEventListener() {
+
+                    final AlertDialog alertDialog1 = new AlertDialog.Builder(
+
+                            context).create();
+
+                        alertDialog1.setTitle("Connect");
+                        alertDialog1.setMessage("How would you like to communicate?");
+
+                        alertDialog1.setIcon(R.drawable.ic_completed_24);
+
+                    alertDialog1.setButton(Dialog.BUTTON_POSITIVE,"Contact via Chat",new DialogInterface.OnClickListener(){
+
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            try {
-                                String Username = snapshot.child(phone).child("Name").getValue().toString();
-                                Intent intent = new Intent(context, com.example.sih.chatApp.Chat.class);
-                                intent.putExtra("Phone", phone);
-                                intent.putExtra("Username", Username);
-                                view.getContext().startActivity(intent);
-                            } catch (Exception e) {
-                                if(check.equals("Eng")){
-                                    Toast.makeText(context, "This user is not present over chat platform", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(context, "यह उपयोगकर्ता चैट प्लेटफॉर्म पर मौजूद नहीं है", Toast.LENGTH_SHORT).show();
+                        public void onClick(DialogInterface dialog, int which) {
+                            reff = FirebaseDatabase.getInstance().getReference().child("Users");
+                            reff.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try {
+                                        String Username = snapshot.child(phone).child("Name").getValue().toString();
+                                        Intent intent = new Intent(context, com.example.sih.chatApp.Chat.class);
+                                        intent.putExtra("Phone", phone);
+                                        intent.putExtra("Username", Username);
+                                        view.getContext().startActivity(intent);
+                                    } catch (Exception e) {
+                                        if(check.equals("Eng")){
+                                            Toast.makeText(context, "This user is not present over chat platform", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(context, "यह उपयोगकर्ता चैट प्लेटफॉर्म पर मौजूद नहीं है", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
                                 }
-                            }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
+                                }
+                            });
                         }
                     });
+
+                    alertDialog1.setButton(Dialog.BUTTON_NEGATIVE,"Contact via Phone Call",new DialogInterface.OnClickListener(){
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            reff = FirebaseDatabase.getInstance().getReference().child("Users");
+                            reff.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    try {
+                                        String contactNumber = snapshot.child(phone).getValue().toString();
+                                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                        callIntent.setData(Uri.fromParts("tel", contactNumber, null));
+                                        view.getContext().startActivity(callIntent);
+                                    } catch (Exception e) {
+                                        if(check.equals("Eng")){
+                                            Toast.makeText(context, "This user is not present over chat platform", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(context, "यह उपयोगकर्ता चैट प्लेटफॉर्म पर मौजूद नहीं है", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                    });
+
+                    alertDialog1.show();
                 }
             });
         } catch (Exception e) {
