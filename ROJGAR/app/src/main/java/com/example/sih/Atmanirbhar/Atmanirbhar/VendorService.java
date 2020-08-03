@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class VendorService extends AppCompatActivity {
-    EditText JobName, Description, NumberOfDays;
+    EditText JobName, Description, Location;
     Button Post;
     DatabaseReference reff, reff1, reff2;
     String phone, S;
@@ -36,7 +36,7 @@ public class VendorService extends AppCompatActivity {
         setContentView(R.layout.activity_vendor_service);
         JobName = findViewById(R.id.job_name);
         Description = findViewById(R.id.description);
-        NumberOfDays = findViewById(R.id.number_of_days);
+        Location = findViewById(R.id.location);
         Post = findViewById(R.id.post);
         reff = FirebaseDatabase.getInstance().getReference();
         reff1 = FirebaseDatabase.getInstance().getReference().child("Atmanirbhar");
@@ -56,7 +56,7 @@ public class VendorService extends AppCompatActivity {
         Post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(JobName.getText().toString().equals("") || Description.getText().toString().equals("") || NumberOfDays.getText().toString().equals("" )){
+                if(JobName.getText().toString().equals("") || Description.getText().toString().equals("") || Location.getText().toString().equals("" )){
                     Toast.makeText(VendorService.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
                 } else {
                     reff1.addValueEventListener(new ValueEventListener() {
@@ -66,11 +66,11 @@ public class VendorService extends AppCompatActivity {
                             if(!isUploaded) {
                                 reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("JobName").setValue(JobName.getText().toString());
                                 reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("Description").setValue(Description.getText().toString());
-                                reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("Days").setValue(NumberOfDays.getText().toString());
+                                reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("Location").setValue(Location.getText().toString());
                                 reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("Phone").setValue(phone);
                                 reff.child("Jobs Revolution").child("Atmanirbhar").child(Long.toString(count1 + 1)).child("JobName").setValue(JobName.getText().toString());
                                 reff.child("Jobs Revolution").child("Atmanirbhar").child(Long.toString(count1 + 1)).child("Description").setValue(Description.getText().toString());
-                                reff.child("Jobs Revolution").child("Atmanirbhar").child(Long.toString(count1 + 1)).child("Days").setValue(NumberOfDays.getText().toString());
+                                reff.child("Jobs Revolution").child("Atmanirbhar").child(Long.toString(count1 + 1)).child("Location").setValue(Location.getText().toString());
                                 reff.child("Jobs Revolution").child("Atmanirbhar").child(Long.toString(count1 + 1)).child("Phone").setValue(phone);
                                 Toast.makeText(VendorService.this, "Job added successully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(VendorService.this, MainActivity.class);

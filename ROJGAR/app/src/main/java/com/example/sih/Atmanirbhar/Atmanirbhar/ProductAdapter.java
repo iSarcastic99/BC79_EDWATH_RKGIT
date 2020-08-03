@@ -64,6 +64,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             holder.Description.setText(details.get(position).getDescription());
             holder.Price.setText(details.get(position).getPrice());
             holder.Number.setText(details.get(position).getPhone());
+            holder.Location.setText(details.get(position).getLocation());
 
             final String phone = details.get(position).getPhone();
 
@@ -147,7 +148,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView ProductName, Description, Number, Price;
+        TextView ProductName, Description, Number, Price, Location;
         String M, J;
         int j;
         SharedPreferences preferences = context.getSharedPreferences(M,j);
@@ -157,6 +158,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             super(itemView);
             ProductName = itemView.findViewById(R.id.productname);
             Description = itemView.findViewById(R.id.description);
+            Location = itemView.findViewById(R.id.location);
             Number = itemView.findViewById(R.id.phone);
             Price = itemView.findViewById(R.id.price);
             check = preferences.getString("Lang","Eng");

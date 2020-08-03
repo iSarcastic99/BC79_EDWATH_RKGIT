@@ -19,7 +19,6 @@
         <activity android:name=".PublishJob.productPublished"></activity>
         <activity android:name=".Jobs.studyprogress" />
         <activity android:name=".PublishJob.VocationalPublished" />
-        <activity android:name=".PublishJob.AddVocational" />
         <activity android:name=".chatApp.ContactUs" />
         <activity android:name=".Atmanirbhar.Atmanirbhar.ClientService" />
         <activity android:name=".Atmanirbhar.Atmanirbhar.Atmanirbhar" />

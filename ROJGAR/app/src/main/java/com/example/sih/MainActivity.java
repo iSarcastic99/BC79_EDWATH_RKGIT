@@ -32,7 +32,6 @@ import com.example.sih.Jobs.Non_Government;
 import com.example.sih.Jobs.Tenders;
 import com.example.sih.Profile.Profile;
 import com.example.sih.Profile.Rating;
-import com.example.sih.PublishJob.AddVocational;
 import com.example.sih.PublishJob.VocationalPublished;
 import com.example.sih.PublishJob.productPublished;
 import com.example.sih.Registration.Favorite_Sectors;
@@ -641,8 +640,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
 
             case R.id.products:
+
                     Intent productIntent = new Intent(MainActivity.this, productPublished.class);
                     startActivity(productIntent);
+
                 return true;
 
             default:

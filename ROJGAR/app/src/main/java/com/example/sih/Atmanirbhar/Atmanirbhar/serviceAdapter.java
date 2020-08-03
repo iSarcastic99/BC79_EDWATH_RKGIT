@@ -65,11 +65,14 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
         try {
             holder.JobName.setText(details.get(position).getJobName());
             holder.Description.setText(details.get(position).getDescription());
-            holder.Days.setText(details.get(position).getDays());
+            holder.Location.setText(details.get(position).getLocation());
             holder.Number.setText(details.get(position).getPhone());
 
             final String phone = details.get(position).getPhone();
+<<<<<<< HEAD
 
+=======
+>>>>>>> baf4947f2f90585b9cb61e271c825ae4e6cea71f
 //            Picasso.get().load(details.get(position).getCompany_logo()).into(holder.company_logo);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -148,7 +151,7 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView JobName, Description, Number, Days;
+        TextView JobName, Description, Number, Location;
         ImageView Profile_Picture;
         String M, J;
         int j;
@@ -160,7 +163,7 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
             JobName = itemView.findViewById(R.id.jobname);
             Description = itemView.findViewById(R.id.description);
             Number = itemView.findViewById(R.id.phone);
-            Days = itemView.findViewById(R.id.days);
+            Location = itemView.findViewById(R.id.location);
             check = preferences.getString("Lang","Eng");
         }
     }
