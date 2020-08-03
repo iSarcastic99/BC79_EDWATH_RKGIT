@@ -20,6 +20,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
+import com.google.firebase.database.DatabaseReference;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,7 +62,6 @@ public class gov_adapter extends RecyclerView.Adapter<gov_adapter.MyViewHolder> 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View view) {
-
                     Intent intent = new Intent(context, Job_Details.class);
                     String ID = details.get(position).getID();
                     intent.putExtra("jobReference", ID);
@@ -76,7 +76,6 @@ public class gov_adapter extends RecyclerView.Adapter<gov_adapter.MyViewHolder> 
                     SharedPreferences.Editor editor = context.getSharedPreferences(C,d).edit();
                     editor.putString("govRelation", Relation);
                     editor.apply();
-
 
                 }
             });

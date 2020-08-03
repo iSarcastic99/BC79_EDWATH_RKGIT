@@ -1,6 +1,8 @@
 package com.example.sih.Atmanirbhar.Atmanirbhar;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +11,18 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sih.R;
 import com.google.cloud.translate.Translate;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -23,6 +31,7 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
     ArrayList<serviceCardView> details;
     ArrayList<serviceCardView> fullDetails;
     Translate translate;
+    DatabaseReference reff;
     String check;
 
 
@@ -44,26 +53,45 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
+
         try {
             holder.JobName.setText(details.get(position).getJobName());
             holder.Description.setText(details.get(position).getDescription());
             holder.Days.setText(details.get(position).getDays());
             holder.Number.setText(details.get(position).getPhone());
 
-
+            final String phone = details.get(position).getPhone();
+            Toast.makeText(context, phone, Toast.LENGTH_SHORT).show();
 //            Picasso.get().load(details.get(position).getCompany_logo()).into(holder.company_logo);
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(final View view) {
-//
-//                    Intent intent = new Intent(context, com.example.sih.chatApp.Chat.class);
-//                    String phone = details.get(position).getPhone();
-//                    String jobName = details.get(position).getJobName();
-//                    intent.putExtra("Phone", phone);
-//                    intent.putExtra("jobName", jobName);
-//                    view.getContext().startActivity(intent);
-//                }
-//            });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    reff = FirebaseDatabase.getInstance().getReference().child("Users");
+                    reff.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            try {
+                                String Username = snapshot.child(phone).child("Name").getValue().toString();
+                                Intent intent = new Intent(context, com.example.sih.chatApp.Chat.class);
+                                intent.putExtra("Phone", phone);
+                                intent.putExtra("Username", Username);
+                                view.getContext().startActivity(intent);
+                            } catch (Exception e) {
+                                if(check.equals("Eng")){
+                                    Toast.makeText(context, "This user is not present over chat platform", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "यह उपयोगकर्ता चैट प्लेटफॉर्म पर मौजूद नहीं है", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
