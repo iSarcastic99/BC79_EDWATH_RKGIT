@@ -131,6 +131,7 @@ public class CreateYourJob extends AppCompatActivity {
                             Intent intent = new Intent(CreateYourJob.this, companyProof.class);
                             intent.putExtra("companyName", cName);
                             startActivity(intent);
+                            finish();
                         } else {
                             verifyEmail(CRemail.getText().toString().trim());
                         }

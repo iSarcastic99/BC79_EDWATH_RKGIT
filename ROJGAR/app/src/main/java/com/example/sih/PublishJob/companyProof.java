@@ -110,6 +110,7 @@ public class companyProof extends AppCompatActivity {
                         }
                         Intent intent = new Intent(companyProof.this, jobsPublished.class );
                         startActivity(intent);
+                        finish();
                     }
 
                 } catch (Exception e){

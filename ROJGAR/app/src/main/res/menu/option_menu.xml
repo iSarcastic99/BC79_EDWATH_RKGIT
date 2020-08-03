@@ -5,6 +5,8 @@
         android:title="Change Language"/>
     <item android:id="@+id/vocational"
         android:title="My Posted Jobs"/>
+    <item android:id="@+id/products"
+        android:title="My Posted Products"/>
     <item android:id="@+id/rate_us"
         android:title="Rate Us"/>
     <item android:id="@+id/contact_us"

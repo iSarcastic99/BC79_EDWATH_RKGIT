@@ -1,11 +1,13 @@
 package com.example.sih.Atmanirbhar.Atmanirbhar;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sih.R;
@@ -65,7 +69,7 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
             holder.Number.setText(details.get(position).getPhone());
 
             final String phone = details.get(position).getPhone();
-            Toast.makeText(context, phone, Toast.LENGTH_SHORT).show();
+
 //            Picasso.get().load(details.get(position).getCompany_logo()).into(holder.company_logo);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,7 +82,7 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
                         alertDialog1.setTitle("Connect");
                         alertDialog1.setMessage("How would you like to communicate?");
 
-                        alertDialog1.setIcon(R.drawable.ic_completed_24);
+//                        alertDialog1.setIcon(R.drawable.ic_completed_24);
 
                     alertDialog1.setButton(Dialog.BUTTON_POSITIVE,"Contact via Chat",new DialogInterface.OnClickListener(){
 
@@ -116,8 +120,15 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             Intent callIntent = new Intent(Intent.ACTION_CALL);
-                            callIntent.setData(Uri.parse("tel:" +91 + phone));
-                            context.startActivity(callIntent);
+                            callIntent.setData(Uri.parse("tel:" + "+91" + phone));
+                            if (ActivityCompat.checkSelfPermission(context,
+                                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                return;
+                            }
+                            else
+                            {
+                                context.startActivity(callIntent);
+                            }
                         }
                     });
 

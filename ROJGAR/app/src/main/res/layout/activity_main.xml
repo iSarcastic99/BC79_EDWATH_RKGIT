@@ -53,7 +53,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:autoStart="true"
-                            android:flipInterval="5000">
+                            android:flipInterval="3000">
                             <ImageView
                                 android:id="@+id/publish"
                                 android:layout_width="match_parent"
@@ -79,7 +79,8 @@
                                 android:id="@+id/roadmap"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/ic_roadmap_banner" />
+                                android:background="@drawable/ic_roadmap_banner"
+                                android:visibility="gone"/>
                         </ViewFlipper>
 
                     </androidx.cardview.widget.CardView>

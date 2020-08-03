@@ -34,6 +34,7 @@ import com.example.sih.Profile.Profile;
 import com.example.sih.Profile.Rating;
 import com.example.sih.PublishJob.AddVocational;
 import com.example.sih.PublishJob.VocationalPublished;
+import com.example.sih.PublishJob.productPublished;
 import com.example.sih.Registration.Favorite_Sectors;
 import com.example.sih.Registration.Login;
 import com.example.sih.chatApp.ContactUs;
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MenuItem Government, Non_Government, Tender, FreeLancing, GetPremium, chat, topJobs, publishJob, Jobs, Features, Resources, Connection, Top_Jobs, Publish;
     int i, j, y, x, b;
     FirebaseUser currentFirebaseUser;
-    Boolean isRegistered = false, English = true, isVocationalAdded = false;
+    Boolean isRegistered = false, English = true;
     ViewFlipper viewFlipper;
 
     @Override
@@ -200,9 +201,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try{
                     dataSnapshot.child("Atmanirbhar").child(phone).getValue().toString();
-                    isVocationalAdded = true;
+
                 } catch (Exception e){
-                    isVocationalAdded = false;
+
                 }
             }
 
@@ -310,6 +311,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor.apply();
                     Intent nonIntent = new Intent(MainActivity.this, Favorite_Sectors.class);
                     startActivity(nonIntent);
+                    finish();
 
                 }
                 else {
@@ -632,13 +634,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
 
             case R.id.vocational:
-                if(!isVocationalAdded) {
-                    Intent vocationalIntent = new Intent(MainActivity.this, AddVocational.class);
-                    startActivity(vocationalIntent);
-                } else {
+
                     Intent vocationalIntent = new Intent(MainActivity.this, VocationalPublished.class);
                     startActivity(vocationalIntent);
-                }
+
+                return true;
+
+            case R.id.products:
+                    Intent productIntent = new Intent(MainActivity.this, productPublished.class);
+                    startActivity(productIntent);
                 return true;
 
             default:
