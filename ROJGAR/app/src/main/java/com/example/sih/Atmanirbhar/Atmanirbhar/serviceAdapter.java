@@ -115,29 +115,9 @@ public class serviceAdapter extends RecyclerView.Adapter<serviceAdapter.MyViewHo
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            reff = FirebaseDatabase.getInstance().getReference().child("Users");
-                            reff.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    try {
-                                        String contactNumber = snapshot.child(phone).getValue().toString();
-                                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                                        callIntent.setData(Uri.fromParts("tel", contactNumber, null));
-                                        view.getContext().startActivity(callIntent);
-                                    } catch (Exception e) {
-                                        if(check.equals("Eng")){
-                                            Toast.makeText(context, "This user is not present over chat platform", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(context, "यह उपयोगकर्ता चैट प्लेटफॉर्म पर मौजूद नहीं है", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
+                            Intent callIntent = new Intent(Intent.ACTION_CALL);
+                            callIntent.setData(Uri.parse("tel:" +91 + phone));
+                            context.startActivity(callIntent);
                         }
                     });
 
