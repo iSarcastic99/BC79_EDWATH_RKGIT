@@ -4,7 +4,7 @@
     <item android:id="@+id/switch1"
         android:title="Change Language"/>
     <item android:id="@+id/vocational"
-        android:title="Post Vocational Job"/>
+        android:title="My Posted Jobs"/>
     <item android:id="@+id/rate_us"
         android:title="Rate Us"/>
     <item android:id="@+id/contact_us"
