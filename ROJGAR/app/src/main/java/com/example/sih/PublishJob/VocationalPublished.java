@@ -127,15 +127,14 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
                 try{
                     JobTitle1.setText(snapshot.child(phone).child("1").child("JobName").getValue().toString());
                     JobDesc1.setText(snapshot.child(phone).child("1").child("Description").getValue().toString());
-                    Days1.setText(snapshot.child(phone).child("1").child("Days").getValue().toString());
+                    Days1.setText(snapshot.child(phone).child("1").child("Location").getValue().toString());
                 } catch(Exception e){
                     if(check.equals("Eng")){
                         Toast.makeText(VocationalPublished.this, "You have not published any job yet.", Toast.LENGTH_SHORT).show();
-                        finish();
                     } else {
                         Toast.makeText(VocationalPublished.this, "आपने अभी तक कोई नौकरी प्रकाशित नहीं की है", Toast.LENGTH_SHORT).show();
-                        finish();
                     }
+                    finish();
                 }
             }
 
@@ -150,7 +149,7 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
                 try{
                     JobTitle2.setText(snapshot.child(phone).child("2").child("JobName").getValue().toString());
                     JobDesc2.setText(snapshot.child(phone).child("2").child("Description").getValue().toString());
-                    Days2.setText(snapshot.child(phone).child("2").child("Days").getValue().toString());
+                    Days2.setText(snapshot.child(phone).child("2").child("Location").getValue().toString());
                     cd2.setVisibility(View.VISIBLE);
                 } catch(Exception e){
 
@@ -168,7 +167,7 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
                 try{
                     JobTitle3.setText(snapshot.child(phone).child("3").child("JobName").getValue().toString());
                     JobDesc3.setText(snapshot.child(phone).child("3").child("Description").getValue().toString());
-                    Days3.setText(snapshot.child(phone).child("3").child("Days").getValue().toString());
+                    Days3.setText(snapshot.child(phone).child("3").child("Location").getValue().toString());
                     cd3.setVisibility(View.VISIBLE);
                 } catch(Exception e){
 
@@ -186,7 +185,7 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
                 try{
                     JobTitle4.setText(snapshot.child(phone).child("4").child("JobName").getValue().toString());
                     JobDesc4.setText(snapshot.child(phone).child("4").child("Description").getValue().toString());
-                    Days4.setText(snapshot.child(phone).child("4").child("Days").getValue().toString());
+                    Days4.setText(snapshot.child(phone).child("4").child("Location").getValue().toString());
                     cd4.setVisibility(View.VISIBLE);
                 } catch(Exception e){
 
@@ -204,7 +203,7 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
                 try{
                     JobTitle5.setText(snapshot.child(phone).child("5").child("JobName").getValue().toString());
                     JobDesc5.setText(snapshot.child(phone).child("5").child("Description").getValue().toString());
-                    Days5.setText(snapshot.child(phone).child("5").child("Days").getValue().toString());
+                    Days5.setText(snapshot.child(phone).child("5").child("Location").getValue().toString());
                     cd5.setVisibility(View.VISIBLE);
                 } catch(Exception e){
 

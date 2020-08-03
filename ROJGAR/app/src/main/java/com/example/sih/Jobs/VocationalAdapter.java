@@ -58,7 +58,7 @@ public class VocationalAdapter extends RecyclerView.Adapter<VocationalAdapter.My
         try {
             holder.JobName.setText(details.get(position).getJobName());
             holder.Description.setText(details.get(position).getDescription());
-            holder.NumberOfDays.setText(details.get(position).getDays());
+            holder.Location.setText(details.get(position).getLocation());
             holder.Phone.setText(details.get(position).getPhone());
             Thread thread = new Thread() {
                 @Override
@@ -115,7 +115,7 @@ public class VocationalAdapter extends RecyclerView.Adapter<VocationalAdapter.My
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView JobName, Description, NumberOfDays, Phone;
+        TextView JobName, Description, Location, Phone;
         ImageView Profile_Picture;
         String M, J;
         int j;
@@ -126,7 +126,7 @@ public class VocationalAdapter extends RecyclerView.Adapter<VocationalAdapter.My
             super(itemView);
             JobName = itemView.findViewById(R.id.jobName);
             Description = itemView.findViewById(R.id.jobDescription);
-            NumberOfDays = itemView.findViewById(R.id.numberOfDays);
+            Location = itemView.findViewById(R.id.location);
             Phone = itemView.findViewById(R.id.phone);
             Profile_Picture = itemView.findViewById(R.id.profile_picture);
             check = preferences.getString("Lang","Eng");

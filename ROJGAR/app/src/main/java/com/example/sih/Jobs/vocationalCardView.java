@@ -1,20 +1,19 @@
 package com.example.sih.Jobs;
 
-
 public class vocationalCardView {
     private String JobName;
     private String Description;
     private String Phone;
-    private String Days;
+    private String Location;
 
     public vocationalCardView() {
     }
 
-    public vocationalCardView(String jobname, String description, String phone, String days) {
+    public vocationalCardView(String jobname, String description, String phone, String location) {
         JobName = jobname ;
         Description = description;
         Phone = phone;
-        Days = days;
+        Location = location;
     }
 
     public String getJobName() {
@@ -29,8 +28,8 @@ public class vocationalCardView {
         return "Phone: " + Phone;
     }
 
-    public String getDays() {
-        return "Number of days: " + Days;
+    public String getLocation() {
+        return "Location: " + Location;
     }
 
 }

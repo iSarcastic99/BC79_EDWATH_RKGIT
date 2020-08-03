@@ -32,7 +32,6 @@ import com.example.sih.Jobs.Non_Government;
 import com.example.sih.Jobs.Tenders;
 import com.example.sih.Profile.Profile;
 import com.example.sih.Profile.Rating;
-import com.example.sih.PublishJob.AddVocational;
 import com.example.sih.PublishJob.VocationalPublished;
 import com.example.sih.Registration.Favorite_Sectors;
 import com.example.sih.Registration.Login;
@@ -632,13 +631,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
 
             case R.id.vocational:
-                if(!isVocationalAdded) {
-                    Intent vocationalIntent = new Intent(MainActivity.this, AddVocational.class);
-                    startActivity(vocationalIntent);
-                } else {
                     Intent vocationalIntent = new Intent(MainActivity.this, VocationalPublished.class);
                     startActivity(vocationalIntent);
-                }
                 return true;
 
             default:

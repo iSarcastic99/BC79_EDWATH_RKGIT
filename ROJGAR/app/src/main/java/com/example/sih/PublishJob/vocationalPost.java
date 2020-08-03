@@ -1,18 +1,20 @@
 package com.example.sih.PublishJob;
 
+import com.example.sih.Registration.Login;
+
 public class vocationalPost {
     private String JobName;
     private String Description;
-    private String Days;
+    private String Location;
     private String Phone;
 
     public vocationalPost() {
     }
 
-    public vocationalPost(String jobName, String description, String days, String phone) {
+    public vocationalPost(String jobName, String description, String location, String phone) {
         JobName = jobName;
         Description = description;
-        Days = days;
+        Location = location;
         Phone = phone;
     }
 
@@ -33,11 +35,11 @@ public class vocationalPost {
     }
 
     public String getDays() {
-        return Days;
+        return Location;
     }
 
-    public void setDays(String days) {
-        Days = days;
+    public void setDays(String location) {
+        Location = location;
     }
 
     public String getPhone() {

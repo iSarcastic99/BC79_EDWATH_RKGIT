@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class VendorProduct extends AppCompatActivity {
-    EditText ProductName, Description, Price;
+    EditText ProductName, Description, Price, Location;
     Button Post;
     DatabaseReference reff, reff1, reff2;
     String phone, S;
@@ -36,6 +36,7 @@ public class VendorProduct extends AppCompatActivity {
         setContentView(R.layout.activity_vendor_product);
         ProductName = findViewById(R.id.product_name);
         Description = findViewById(R.id.description);
+        Location = findViewById(R.id.location);
         Price = findViewById(R.id.price);
         Post = findViewById(R.id.post);
         reff = FirebaseDatabase.getInstance().getReference();
@@ -56,7 +57,7 @@ public class VendorProduct extends AppCompatActivity {
         Post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ProductName.getText().toString().equals("") || Description.getText().toString().equals("") || Price.getText().toString().equals("" )){
+                if(ProductName.getText().toString().equals("") || Description.getText().toString().equals("") || Price.getText().toString().equals("") || Location.getText().toString().equals("")){
                     Toast.makeText(VendorProduct.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
                 } else {
                     reff1.addValueEventListener(new ValueEventListener() {
@@ -67,8 +68,10 @@ public class VendorProduct extends AppCompatActivity {
                                 reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("ProductName").setValue(ProductName.getText().toString());
                                 reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("Description").setValue(Description.getText().toString());
                                 reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("Price").setValue(Price.getText().toString());
+                                reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("Location").setValue(Location.getText().toString());
                                 reff.child("Atmanirbhar").child(phone).child(Long.toString(count + 1)).child("Phone").setValue(phone);
                                 reff.child("Products").child("Atmanirbhar").child(Long.toString(count1 + 1)).child("ProductName").setValue(ProductName.getText().toString());
+                                reff.child("Products").child("Atmanirbhar").child(Long.toString(count + 1)).child("Location").setValue(Location.getText().toString());
                                 reff.child("Products").child("Atmanirbhar").child(Long.toString(count1 + 1)).child("Description").setValue(Description.getText().toString());
                                 reff.child("Products").child("Atmanirbhar").child(Long.toString(count1 + 1)).child("Price").setValue(Price.getText().toString());
                                 reff.child("Products").child("Atmanirbhar").child(Long.toString(count1 + 1)).child("Phone").setValue(phone);
