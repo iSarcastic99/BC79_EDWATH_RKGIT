@@ -3,22 +3,23 @@ package com.example.sih.chatApp;
 import android.Manifest;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sih.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import ai.api.AIDataService;
 import ai.api.AIListener;
 import ai.api.AIServiceException;
@@ -34,11 +35,10 @@ public class ContactUs extends AppCompatActivity implements AIListener{
     EditText editText;
     RelativeLayout addBtn;
     DatabaseReference ref;
-    String phone, S, M, check;
-    TextView Title;
+    String phone, S;
     FirebaseRecyclerAdapter<ChatMessage,chat_rec> adapter;
     Boolean flagFab = true;
-    int i, j;
+    int i;
     private AIService aiService;
 
     @Override
@@ -46,9 +46,8 @@ public class ContactUs extends AppCompatActivity implements AIListener{
         super.onCreate(savedInstanceState);
         SharedPreferences preferences = getSharedPreferences(S, i);
         phone = preferences.getString("Phone", "");
-        SharedPreferences preferences1 = getSharedPreferences(M, j);
-        check = preferences1.getString("Lang", "Eng");
         setContentView(R.layout.activity_contact_us2);
+
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
         recyclerView = findViewById(R.id.recyclerView);
         editText = findViewById(R.id.editText);

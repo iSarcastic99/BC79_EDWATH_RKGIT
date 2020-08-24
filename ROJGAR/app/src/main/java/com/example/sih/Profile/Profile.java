@@ -31,6 +31,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.sih.Jobs.Government;
 import com.example.sih.Jobs.Non_Government;
+import com.example.sih.Jobs.StudyResources;
 import com.example.sih.MainActivity;
 import com.example.sih.R;
 import com.example.sih.Registration.Login;
@@ -73,7 +74,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     ActionBarDrawerToggle t;
     Boolean isRegistered = false;
     Menu menu1, menu2;
-    MenuItem Gov, Non_Gov, Tender, Free_Lancing, GetPremium, Resources, chat, topJobs, publishJob, Jobs, Features, Connection, Top_Jobs, Publish;
+    MenuItem Gov, Non_Gov, Tender, Free_Lancing, Resources, GetPremium, chat, topJobs, publishJob, Jobs, Features, Connection, Top_Jobs, Publish;
     ProgressDialog pd;
     String username;
     String path;
@@ -124,9 +125,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         Jobs = menu2.findItem(R.id.title1);
         Features = menu2.findItem(R.id.title2);
         Top_Jobs = menu2.findItem(R.id.topJobs);
-        Resources = menu2.findItem(R.id.resources);
         Connection = menu2.findItem(R.id.chat);
         Publish = menu2.findItem(R.id.publish);
+        Resources = menu2.findItem(R.id.resources);
         uname = navigationView.getHeaderView(0).findViewById(R.id.name_of_user);
         uphone = navigationView.getHeaderView(0).findViewById(R.id.phone_of_user);
         drawerProfile = navigationView.getHeaderView(0).findViewById(R.id.image_of_user);
@@ -357,14 +358,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 Intent intent5 = new Intent(Profile.this, Government.class);
                 startActivity(intent5);
                 break;
-
             case R.id.resources:
-                Intent redirectIntent = new Intent(Intent.ACTION_VIEW);
-                redirectIntent.addCategory(Intent.CATEGORY_BROWSABLE);
-                redirectIntent.setData(Uri.parse("https://swayam.gov.in/"));
-                startActivity(redirectIntent);
+                Intent intent3 = new Intent(Profile.this, StudyResources.class);
+                startActivity(intent3);
+            case R.id.premium:
+                Intent intent2 = new Intent(Profile.this, com.example.sih.Profile.Premium.class);
+                startActivity(intent2);
                 break;
-                
             case R.id.chat:
                 Intent intent6 = new Intent(Profile.this, com.example.sih.chatApp.User_List.class);
                 startActivity(intent6);
@@ -492,7 +492,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         Days.setText(days + " दिन शेष");
         Jobs.setTitle("           नौकरी क्षेत्र");
         Features.setTitle("           अधिक सुविधाएं");
-        Resources.setTitle("                  अध्ययन के संसाधन");
     }
     public void NavEng(){
         Gov.setTitle("                  Government Jobs");
@@ -503,7 +502,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         Publish.setTitle("                  Publish Your Job");
         Top_Jobs.setTitle("                  Top Jobs");
         Connection.setTitle("                  Build Your Connections");
-        Resources.setTitle("                  Study Resources");
         Premium.setText("Premium");
         if(days.equals("1")){
             Days.setText(days + " day remaining");

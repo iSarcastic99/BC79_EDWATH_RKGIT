@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -25,22 +28,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.sih.Atmanirbhar.Atmanirbhar.Atmanirbhar;
+import com.example.sih.Atmanirbhar.Atmanirbhar;
+import com.example.sih.Jobs.Dream_jobs;
 import com.example.sih.Jobs.Free_Lancing;
 import com.example.sih.Jobs.Government;
 import com.example.sih.Jobs.Non_Government;
 import com.example.sih.Jobs.Tenders;
+import com.example.sih.Profile.Premium;
 import com.example.sih.Profile.Profile;
 import com.example.sih.Profile.Rating;
-import com.example.sih.PublishJob.VocationalPublished;
-import com.example.sih.PublishJob.productPublished;
 import com.example.sih.Registration.Favorite_Sectors;
 import com.example.sih.Registration.Login;
 import com.example.sih.chatApp.ContactUs;
 import com.example.sih.chatApp.User_List;
 import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,6 +55,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.text.SimpleDateFormat;
@@ -62,22 +70,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView bgapp;
     Animation bganim;
     TextView GovText, NonText, TenderText, FreeText, uphone, uname, Premium, Days;
-    ImageView Profile, Crown, topJob, dreamJob, roadmap, premium;
+    ImageView Profile, Crown, publish, topJob, dreamJob, roadmap, premium;
     DrawerLayout drawer;
     Animation frombotton;
     ImageButton Gov, Non_Gov, Tenders, Free_Lancing;
     RelativeLayout menus;
     DatabaseReference reff, reff1, reff2, reff3;
-    String phone, S, M, J, A, user_name, check, lang, X, premium_date, currentDate, remainingDays = "0", isPremium, u_name, days, path, isFirst;
+    String phone, S, M, J, A, user_name, check, lang, X, premium_date, currentDate, remainingDays = "0", isPremium, u_name, days, path, isFirst, govRelation;
     NavigationView navigationView;
     StorageReference mStorageReference;
     ActionBarDrawerToggle t;
     Menu menu1, menu2;
-    MenuItem Government, Non_Government, Tender, FreeLancing, GetPremium, chat, topJobs, publishJob, Jobs, Features, Resources, Connection, Top_Jobs, Publish;
+    MenuItem Government, Non_Government, Tender, Resources, FreeLancing, GetPremium, chat, topJobs, publishJob, Jobs, Features, Connection, Top_Jobs, Publish;
     int i, j, y, x, b;
     FirebaseUser currentFirebaseUser;
     Boolean isRegistered = false, English = true;
     ViewFlipper viewFlipper;
+    GestureDetector gestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         path = preferences.getString("path", "");
         SharedPreferences preferences2 = getSharedPreferences(A,b);
         isFirst = preferences2.getString("isFirst","notFirst");
+        SharedPreferences preferences3 = getSharedPreferences(J,x);
+        govRelation = preferences3.getString("govRelation","");
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
         Firebase.setAndroidContext(this);
@@ -110,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dreamJob = findViewById(R.id.dreamJob);
         roadmap = findViewById(R.id.roadmap);
         premium = findViewById(R.id.premium);
+        publish = findViewById(R.id.publish);
+        gestureDetector = new GestureDetector(this, new SingleTapConfirm());
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -120,8 +133,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
         currentDate = df.format(c);
 
+        ImageView crown = view.findViewById(R.id.premium);
+        crown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent premiumIntent = new Intent(MainActivity.this, Premium.class);
+                startActivity(premiumIntent);
+
+            }
+        });
 
         ImageView dream= view.findViewById(R.id.dream_jobs);
+        dream.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isPremium.equals("Yes")) {
+                    SharedPreferences.Editor editor = getSharedPreferences(J, x).edit();
+                    editor.putString("Activity", "Main");
+                    editor.apply();
+                    Intent dreamIntent = new Intent(MainActivity.this, Dream_jobs.class);
+                    startActivity(dreamIntent);
+                } else{
+                    Intent dreamIntent = new Intent(MainActivity.this, Premium.class);
+                    startActivity(dreamIntent);
+                }
+            }
+        });
 
         ImageView profile = view.findViewById(R.id.profile);
         profile.setOnClickListener(new View.OnClickListener() {
@@ -176,33 +214,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        reff1 = FirebaseDatabase.getInstance().getReference();
-        reff1.addValueEventListener(new ValueEventListener() {
+        publish.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                try{
-                    dataSnapshot.child("Company Representative Details").child(phone).child("Post").getValue().toString();
-                    isRegistered = true;
-                } catch (Exception e){
-                    isRegistered = false;
-                }
-            }
+            public boolean onTouch(View view, MotionEvent motionEvent) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(MainActivity.this, "Something went wrong",Toast.LENGTH_LONG).show();
+                if (gestureDetector.onTouchEvent(motionEvent)) {
+                    if (!isRegistered) {
+                        Intent intent7 = new Intent(MainActivity.this, com.example.sih.PublishJob.CreateYourJob.class);
+                        startActivity(intent7);
+                    }
+                    else{
+                        Intent intent7 = new Intent(MainActivity.this, com.example.sih.PublishJob.jobsPublished.class);
+                        startActivity(intent7);
+                    }
+
+                    return true;
+                }
+
+                return false;
             }
         });
 
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        reff1 = FirebaseDatabase.getInstance().getReference().child("Company Representative Details").child(phone);
         reff1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try{
-                    dataSnapshot.child("Atmanirbhar").child(phone).getValue().toString();
-
+                    dataSnapshot.child("Post").getValue().toString();
+                    isRegistered = true;
                 } catch (Exception e){
-
+                    isRegistered = false;
                 }
             }
 
@@ -260,8 +302,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Tender = menu2.findItem(R.id.tenders);
         FreeLancing = menu2.findItem(R.id.free_lancing);
         GetPremium = menu2.findItem(R.id.premium);
-        Resources = menu2.findItem(R.id.resources);
         chat = menu2.findItem(R.id.chat);
+        Resources = menu2.findItem(R.id.resources);
         topJobs = menu2.findItem(R.id.topJobs);
         publishJob = menu2.findItem(R.id.publish);
         Jobs = menu2.findItem(R.id.title1);
@@ -293,6 +335,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     SharedPreferences.Editor editor = getSharedPreferences(J,x).edit();
                     editor.putString("Activity", "Government");
                     editor.apply();
+
                     Intent govIntent = new Intent(MainActivity.this, Government.class);
                     startActivity(govIntent);
 
@@ -310,7 +353,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor.apply();
                     Intent nonIntent = new Intent(MainActivity.this, Favorite_Sectors.class);
                     startActivity(nonIntent);
-                    finish();
 
                 }
                 else {
@@ -374,6 +416,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bganim = AnimationUtils.loadAnimation(this, R.anim.anim);
         bgapp.animate().translationY(-3000).setDuration(800).setStartDelay(900);
         menus.startAnimation(frombotton);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            if (!task.isSuccessful()) {
+                                //currently I am writing nothing here, you can write whatever you want but just inform me.
+                                return;
+                            } else {
+                                //token will be saved in database
+                                String token = task.getResult().getToken();
+                                String user_token = getString(R.string.msg_token_fmt, token);
+                                Firebase reference = new Firebase("https://smart-e60d6.firebaseio.com/Users");
+                                reference.child(phone).child("Message Token").setValue(user_token);
+                            }
+                        }
+                    });
+                    FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 180000);
 
         reff = FirebaseDatabase.getInstance().getReference().child("Users").child(phone);
         reff.addValueEventListener(new ValueEventListener() {
@@ -538,9 +607,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent5 = new Intent(MainActivity.this, com.example.sih.Jobs.Tenders.class);
                 startActivity(intent5);
                 break;
-
+            case R.id.premium:
+                Intent intent2 = new Intent(MainActivity.this, com.example.sih.Profile.Premium.class);
+                startActivity(intent2);
+                break;
+            case R.id.atmanirbhar:
+                Intent intent6 = new Intent(MainActivity.this, Atmanirbhar.class);
+                startActivity(intent6);
+                break;
+            case R.id.resources:
+                Intent intent3 = new Intent(MainActivity.this, com.example.sih.Jobs.StudyResources.class);
+                startActivity(intent3);
+                break;
             case R.id.chat:
                 if (isFirst.equals("notFirst")){
+
                     SharedPreferences.Editor editor4 = getSharedPreferences(J,x).edit();
                     editor4.putString("Activity", "Chat");
                     editor4.apply();
@@ -573,14 +654,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent8);
                 break;
 
-            case R.id.resources:
-                Intent intent9 = new Intent(MainActivity.this, com.example.sih.Jobs.studyprogress.class);
-                startActivity(intent9);
-                break;
-            case R.id.atmanirbhar:
-                Intent intent6 = new Intent(MainActivity.this, Atmanirbhar.class);
-                startActivity(intent6);
-                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -628,22 +701,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return true;
 
             case R.id.contact_us:
-              Intent intent = new Intent(MainActivity.this, ContactUs.class);
-              startActivity(intent);
-                return true;
-
-            case R.id.vocational:
-
-                    Intent vocationalIntent = new Intent(MainActivity.this, VocationalPublished.class);
-                    startActivity(vocationalIntent);
-
-                return true;
-
-            case R.id.products:
-
-                    Intent productIntent = new Intent(MainActivity.this, productPublished.class);
-                    startActivity(productIntent);
-
+                Intent intent = new Intent(MainActivity.this, ContactUs.class);
+                startActivity(intent);
                 return true;
 
             default:
@@ -681,11 +740,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Publish.setTitle("                  अपनी नौकरी प्रकाशित करें");
         Top_Jobs.setTitle("                  शीर्ष नौकरियां");
         Connection.setTitle("                  अपने कनेक्शन बनाएँ");
+        Resources.setTitle("                  अध्ययन के संसाधन");
         Premium.setText("प्रीमियम");
         Days.setText(days + " दिन शेष");
         Jobs.setTitle("           नौकरी क्षेत्र");
         Features.setTitle("           अधिक सुविधाएं");
-        Resources.setTitle("                  अध्ययन के संसाधन");
     }
     public void NavEng(){
         Government.setTitle("                  Government Jobs");
@@ -781,19 +840,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    public void publish(View view) {
-
-        if (!isRegistered) {
-            Intent intent7 = new Intent(MainActivity.this, com.example.sih.PublishJob.CreateYourJob.class);
-            startActivity(intent7);
-        }
-        else{
-            Intent intent7 = new Intent(MainActivity.this, com.example.sih.PublishJob.jobsPublished.class);
-            startActivity(intent7);
-        }
-
-    }
-
     public StringBuilder decryptUsername(String uname) {
         int pllen;
         StringBuilder sb = new StringBuilder();
@@ -886,6 +932,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         return remaining;
+    }
+
+    private static class SingleTapConfirm extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent event) {
+            return true;
+        }
     }
 
 }

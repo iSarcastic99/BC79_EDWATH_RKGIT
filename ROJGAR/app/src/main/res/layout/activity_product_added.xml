@@ -85,6 +85,12 @@
                                 android:scaleType="fitXY"/>
 
                             <TextView
+                                android:id="@+id/price1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"/>
+
+                            <TextView
                                 android:id="@+id/days1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -161,6 +167,12 @@
                                 android:scaleType="fitXY"/>
 
                             <TextView
+                                android:id="@+id/price2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"/>
+
+                            <TextView
                                 android:id="@+id/days2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -230,6 +242,12 @@
 
                             <TextView
                                 android:id="@+id/job_title3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"/>
+
+                            <TextView
+                                android:id="@+id/price3"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:scaleType="fitXY"/>
@@ -308,6 +326,12 @@
                                 android:scaleType="fitXY"/>
 
                             <TextView
+                                android:id="@+id/price4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"/>
+
+                            <TextView
                                 android:id="@+id/days4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -377,6 +401,12 @@
 
                             <TextView
                                 android:id="@+id/job_title5"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"/>
+
+                            <TextView
+                                android:id="@+id/price5"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:scaleType="fitXY"/>

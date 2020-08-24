@@ -29,7 +29,6 @@
         app:layout_constraintStart_toEndOf="@+id/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.4"
         app:layout_constraintHorizontal_bias="0.33"/>
@@ -39,7 +38,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/likes"
-        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/premium"
         app:layout_constraintEnd_toStartOf="@id/profile"
         app:layout_constraintTop_toTopOf="parent"

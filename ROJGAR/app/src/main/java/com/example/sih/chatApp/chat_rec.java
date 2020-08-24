@@ -1,8 +1,10 @@
 package com.example.sih.chatApp;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.sih.R;
 
 public class chat_rec extends RecyclerView.ViewHolder  {

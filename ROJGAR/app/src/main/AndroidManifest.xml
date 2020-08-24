@@ -5,9 +5,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_CALL_LOG" />
-    <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
 
     <application
         android:allowBackup="true"
@@ -16,16 +13,16 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PublishJob.productPublished"></activity>
-        <activity android:name=".Jobs.studyprogress" />
-        <activity android:name=".PublishJob.VocationalPublished" />
-        <activity android:name=".chatApp.ContactUs" />
-        <activity android:name=".Atmanirbhar.Atmanirbhar.ClientService" />
-        <activity android:name=".Atmanirbhar.Atmanirbhar.Atmanirbhar" />
-        <activity android:name=".Atmanirbhar.Atmanirbhar.VendorProduct" />
-        <activity android:name=".Atmanirbhar.Atmanirbhar.VendorService" />
-        <activity android:name=".Atmanirbhar.Atmanirbhar.ProductService" />
-        <activity android:name=".Atmanirbhar.Atmanirbhar.ClientProduct" />
+        <activity android:name=".Atmanirbhar.ProductAdded"></activity>
+        <activity android:name=".Atmanirbhar.UserPublished" />
+        <activity android:name=".Atmanirbhar.ClientProduct" />
+        <activity android:name=".Atmanirbhar.ClientService" />
+        <activity android:name=".Atmanirbhar.VendorProduct" />
+        <activity android:name=".Atmanirbhar.VendorService" />
+        <activity android:name=".Atmanirbhar.ProductService" />
+        <activity android:name=".Atmanirbhar.Atmanirbhar" />
+        <activity android:name=".Jobs.StudyResources" />
+        <activity android:name=".Registration.Welcome" />
         <activity android:name=".Jobs.jobApply" />
         <activity
             android:name=".Jobs.topJobs"
@@ -34,7 +31,10 @@
             android:name=".Jobs.topJobsFragment"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".Registration.Favorite_Sectors" />
+        <activity android:name=".Jobs.Dream_jobs" />
         <activity android:name=".Jobs.Job_Details" />
+        <activity android:name=".Profile.Premium" />
+        <activity android:name=".Jobs.progressTracker" />
         <activity android:name=".PublishJob.jobsPublished" />
         <activity android:name=".PublishJob.jobDetails" />
         <activity android:name=".PublishJob.companyProof" />
@@ -69,6 +69,7 @@
         <activity android:name=".Jobs.Tenders" />
         <activity android:name=".Jobs.Free_Lancing" />
         <activity android:name=".Jobs.Government" />
+        <activity android:name=".chatApp.ContactUs" />
         <activity android:name=".Jobs.Non_Government" />
         <activity android:name=".Registration.Register2" />
         <activity android:name=".MainActivity" />

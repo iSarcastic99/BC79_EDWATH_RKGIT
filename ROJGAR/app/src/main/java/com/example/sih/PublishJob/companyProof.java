@@ -110,7 +110,6 @@ public class companyProof extends AppCompatActivity {
                         }
                         Intent intent = new Intent(companyProof.this, jobsPublished.class );
                         startActivity(intent);
-                        finish();
                     }
 
                 } catch (Exception e){
@@ -118,7 +117,7 @@ public class companyProof extends AppCompatActivity {
                 }
             }
         });
-
+        Toast.makeText(this, phone, Toast.LENGTH_SHORT).show();
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

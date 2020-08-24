@@ -1,20 +1,21 @@
-package com.example.sih.Atmanirbhar.Atmanirbhar;
+package com.example.sih.Atmanirbhar;
 
+import com.example.sih.Registration.Login;
 
-public class serviceCardView {
+public class PublishedCardView {
     private String JobName;
     private String Description;
-    private String Phone;
     private String Location;
+    private String Phone;
 
-    public serviceCardView() {
+    public PublishedCardView() {
     }
 
-    public serviceCardView(String jobname, String phone, String description, String location) {
-        JobName = jobname;
+    public PublishedCardView(String jobName, String description, String location, String phone) {
+        JobName = jobName;
         Description = description;
-        Phone = phone;
         Location = location;
+        Phone = phone;
     }
 
     public String getJobName() {
@@ -33,19 +34,19 @@ public class serviceCardView {
         Description = description;
     }
 
-    public String getPhone() {
-        return Phone;
-    }
-
-    public void setPhone(String phone) {
-        Phone = phone;
-    }
-
     public String getLocation() {
         return Location;
     }
 
     public void setLocation(String location) {
         Location = location;
+    }
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 }

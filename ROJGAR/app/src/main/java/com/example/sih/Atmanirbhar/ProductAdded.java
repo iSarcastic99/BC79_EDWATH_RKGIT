@@ -1,4 +1,4 @@
-package com.example.sih.PublishJob;
+package com.example.sih.Atmanirbhar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -49,7 +49,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class VocationalPublished extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ProductAdded extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     TextView uphone, uname;
     Boolean English = true;
@@ -62,6 +62,7 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
     TextView JobTitle1, JobTitle2, JobTitle3, JobTitle4, JobTitle5;
     TextView JobDesc1, JobDesc2, JobDesc3, JobDesc4, JobDesc5;
     TextView Days1, Days2, Days3, Days4, Days5;
+    TextView Price1, Price2, Price3, Price4, Price5;
     StorageReference mStorageReference;
     ActionBarDrawerToggle t;
     Menu menu1, menu2;
@@ -77,7 +78,7 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
         path = preferences.getString("path", "");
         SharedPreferences preferences1 = getSharedPreferences(M,j);
         check = preferences1.getString("Lang","Eng");
-        setContentView(R.layout.activity_vocational_published);
+        setContentView(R.layout.activity_product_added);
         drawer = findViewById(R.id.draw_layout);
 
         JobTitle1 = findViewById(R.id.job_title1);
@@ -90,6 +91,11 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
         JobDesc3 = findViewById(R.id.job_description3);
         JobDesc4 = findViewById(R.id.job_description4);
         JobDesc5 = findViewById(R.id.job_description5);
+        Price1 = findViewById(R.id.price1);
+        Price2 = findViewById(R.id.price2);
+        Price3 = findViewById(R.id.price3);
+        Price4 = findViewById(R.id.price4);
+        Price5 = findViewById(R.id.price5);
         Days1 = findViewById(R.id.days1);
         Days2 = findViewById(R.id.days2);
         Days3 = findViewById(R.id.days3);
@@ -115,24 +121,25 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
         profile = navigationView.getHeaderView(0).findViewById(R.id.image_of_user);
         loadImageFromStorage(path);
         if(check.equals("Eng")){
-            actionBar.setTitle("Your Posts");
+            actionBar.setTitle("Your Products");
         } else {
-            actionBar.setTitle("आपके पोस्ट");
+            actionBar.setTitle("आपके उत्पाद");
         }
 
-        reff1 = FirebaseDatabase.getInstance().getReference().child("Atmanirbhar");
+        reff1 = FirebaseDatabase.getInstance().getReference().child("Products").child("Atmanirbhar");
         reff1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
-                    JobTitle1.setText(snapshot.child(phone).child("1").child("JobName").getValue().toString());
+                    JobTitle1.setText(snapshot.child(phone).child("1").child("ProductName").getValue().toString());
                     JobDesc1.setText(snapshot.child(phone).child("1").child("Description").getValue().toString());
                     Days1.setText(snapshot.child(phone).child("1").child("Location").getValue().toString());
+                    Price1.setText(snapshot.child(phone).child("1").child("Price").getValue().toString());
                 } catch(Exception e){
                     if(check.equals("Eng")){
-                        Toast.makeText(VocationalPublished.this, "You have not published any job yet.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductAdded.this, "You have not added any product yet.", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(VocationalPublished.this, "आपने अभी तक कोई नौकरी प्रकाशित नहीं की है", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductAdded.this, "आपने अभी तक कोई नौकरी प्रकाशित नहीं की है", Toast.LENGTH_SHORT).show();
                     }
                     finish();
                 }
@@ -219,21 +226,21 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(VocationalPublished.this, Profile.class);
+                Intent profileIntent = new Intent(ProductAdded.this, Profile.class);
                 startActivity(profileIntent);
             }
         });
         uphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(VocationalPublished.this, Profile.class);
+                Intent profileIntent = new Intent(ProductAdded.this, Profile.class);
                 startActivity(profileIntent);
             }
         });
         uname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(VocationalPublished.this, Profile.class);
+                Intent profileIntent = new Intent(ProductAdded.this, Profile.class);
                 startActivity(profileIntent);
             }
         });
@@ -278,9 +285,9 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 if(check.equals("Hin")) {
-                    Toast.makeText(VocationalPublished.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductAdded.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
                 } else{
-                    Toast.makeText(VocationalPublished.this, "There is some error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductAdded.this, "There is some error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -297,19 +304,19 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
         switch (menuItem.getItemId()){
 
             case R.id.non_government:
-                Intent intent1 = new Intent(VocationalPublished.this, Non_Government.class);
+                Intent intent1 = new Intent(ProductAdded.this, Non_Government.class);
                 startActivity(intent1);
                 break;
             case R.id.free_lancing:
-                Intent intent = new Intent(VocationalPublished.this, com.example.sih.Jobs.Free_Lancing.class);
+                Intent intent = new Intent(ProductAdded.this, com.example.sih.Jobs.Free_Lancing.class);
                 startActivity(intent);
                 break;
             case R.id.government:
-                Intent intent2 = new Intent(VocationalPublished.this, Government.class);
+                Intent intent2 = new Intent(ProductAdded.this, Government.class);
                 startActivity(intent2);
                 break;
             case R.id.tenders:
-                Intent intent5 = new Intent(VocationalPublished.this, Tenders.class);
+                Intent intent5 = new Intent(ProductAdded.this, Tenders.class);
                 startActivity(intent5);
                 break;
         }
@@ -344,7 +351,7 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
                 }
                 return true;
             case R.id.logout: {
-                Intent intent = new Intent(VocationalPublished.this, Login.class);
+                Intent intent = new Intent(ProductAdded.this, Login.class);
                 startActivity(intent);
                 SharedPreferences.Editor editor = getSharedPreferences(S, i).edit();
                 editor.putString("Status", "Null");
@@ -353,7 +360,7 @@ public class VocationalPublished extends AppCompatActivity implements Navigation
                 break;
             }
             case R.id.rate_us:
-                Intent rateIntent = new Intent(VocationalPublished.this, Rating.class);
+                Intent rateIntent = new Intent(ProductAdded.this, Rating.class);
                 startActivity(rateIntent);
                 return true;
 

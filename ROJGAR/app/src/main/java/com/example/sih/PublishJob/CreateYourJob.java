@@ -115,26 +115,25 @@ public class CreateYourJob extends AppCompatActivity {
                     }
 
                     else {
-                        if(isVerified.equals("Yes")) {
-                            if(check.equals(getResources().getString(R.string.english))) {
-                                Cregister.setText("Register");
-                            } else {
-                                Cregister.setText(R.string.register1);
-                            }
-                            reff.child("Users").child(phone).child("Company").setValue(Cname.getText().toString().trim());
-                            reff.child("Company Representative Details").child(phone).setValue(users1);
-                            if(check.equals("Eng")) {
+                          if(isVerified.equals("Yes")) {
+                              if(check.equals(getResources().getString(R.string.english))) {
+                                  Cregister.setText("Register");
+                              } else {
+                                  Cregister.setText(R.string.register1);
+                              }
+                          reff.child("Users").child(phone).child("Company").setValue(Cname.getText().toString().trim());
+                          reff.child("Company Representative Details").child(phone).setValue(users1);
+                          if(check.equals("Eng")) {
 //                              Toast.makeText(CreateYourJob.this, "Data inserted successfully", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(CreateYourJob.this, "डेटा सफलतापूर्वक डाला गया", Toast.LENGTH_LONG).show();
-                            }
-                            Intent intent = new Intent(CreateYourJob.this, companyProof.class);
-                            intent.putExtra("companyName", cName);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            verifyEmail(CRemail.getText().toString().trim());
-                        }
+                          } else {
+                              Toast.makeText(CreateYourJob.this, "डेटा सफलतापूर्वक डाला गया", Toast.LENGTH_LONG).show();
+                          }
+                          Intent intent = new Intent(CreateYourJob.this, companyProof.class);
+                          intent.putExtra("companyName", cName);
+                          startActivity(intent);
+                          } else {
+                              verifyEmail(CRemail.getText().toString().trim());
+                          }
                     }
 
                 } catch (Exception e){

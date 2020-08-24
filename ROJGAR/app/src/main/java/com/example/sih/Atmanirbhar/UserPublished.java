@@ -1,4 +1,4 @@
-package com.example.sih.PublishJob;
+package com.example.sih.Atmanirbhar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -49,7 +49,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class productPublished extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class UserPublished extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     TextView uphone, uname;
     Boolean English = true;
@@ -77,7 +77,7 @@ public class productPublished extends AppCompatActivity implements NavigationVie
         path = preferences.getString("path", "");
         SharedPreferences preferences1 = getSharedPreferences(M,j);
         check = preferences1.getString("Lang","Eng");
-        setContentView(R.layout.activity_vocational_published);
+        setContentView(R.layout.activity_user_published);
         drawer = findViewById(R.id.draw_layout);
 
         JobTitle1 = findViewById(R.id.job_title1);
@@ -120,22 +120,21 @@ public class productPublished extends AppCompatActivity implements NavigationVie
             actionBar.setTitle("आपके पोस्ट");
         }
 
-        reff1 = FirebaseDatabase.getInstance().getReference().child("Products").child("Atmanirbhar");
+        reff1 = FirebaseDatabase.getInstance().getReference().child("Atmanirbhar");
         reff1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try{
                     JobTitle1.setText(snapshot.child(phone).child("1").child("JobName").getValue().toString());
                     JobDesc1.setText(snapshot.child(phone).child("1").child("Description").getValue().toString());
-                    Days1.setText(snapshot.child(phone).child("1").child("Days").getValue().toString());
+                    Days1.setText(snapshot.child(phone).child("1").child("Location").getValue().toString());
                 } catch(Exception e){
                     if(check.equals("Eng")){
-                        Toast.makeText(productPublished.this, "You have not published any job yet.", Toast.LENGTH_SHORT).show();
-                        finish();
+                        Toast.makeText(UserPublished.this, "You have not published any job yet.", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(productPublished.this, "आपने अभी तक कोई नौकरी प्रकाशित नहीं की है", Toast.LENGTH_SHORT).show();
-                        finish();
+                        Toast.makeText(UserPublished.this, "आपने अभी तक कोई नौकरी प्रकाशित नहीं की है", Toast.LENGTH_SHORT).show();
                     }
+                    finish();
                 }
             }
 
@@ -150,7 +149,7 @@ public class productPublished extends AppCompatActivity implements NavigationVie
                 try{
                     JobTitle2.setText(snapshot.child(phone).child("2").child("JobName").getValue().toString());
                     JobDesc2.setText(snapshot.child(phone).child("2").child("Description").getValue().toString());
-                    Days2.setText(snapshot.child(phone).child("2").child("Days").getValue().toString());
+                    Days2.setText(snapshot.child(phone).child("2").child("Location").getValue().toString());
                     cd2.setVisibility(View.VISIBLE);
                 } catch(Exception e){
 
@@ -168,7 +167,7 @@ public class productPublished extends AppCompatActivity implements NavigationVie
                 try{
                     JobTitle3.setText(snapshot.child(phone).child("3").child("JobName").getValue().toString());
                     JobDesc3.setText(snapshot.child(phone).child("3").child("Description").getValue().toString());
-                    Days3.setText(snapshot.child(phone).child("3").child("Days").getValue().toString());
+                    Days3.setText(snapshot.child(phone).child("3").child("Location").getValue().toString());
                     cd3.setVisibility(View.VISIBLE);
                 } catch(Exception e){
 
@@ -186,7 +185,7 @@ public class productPublished extends AppCompatActivity implements NavigationVie
                 try{
                     JobTitle4.setText(snapshot.child(phone).child("4").child("JobName").getValue().toString());
                     JobDesc4.setText(snapshot.child(phone).child("4").child("Description").getValue().toString());
-                    Days4.setText(snapshot.child(phone).child("4").child("Days").getValue().toString());
+                    Days4.setText(snapshot.child(phone).child("4").child("Location").getValue().toString());
                     cd4.setVisibility(View.VISIBLE);
                 } catch(Exception e){
 
@@ -204,7 +203,7 @@ public class productPublished extends AppCompatActivity implements NavigationVie
                 try{
                     JobTitle5.setText(snapshot.child(phone).child("5").child("JobName").getValue().toString());
                     JobDesc5.setText(snapshot.child(phone).child("5").child("Description").getValue().toString());
-                    Days5.setText(snapshot.child(phone).child("5").child("Days").getValue().toString());
+                    Days5.setText(snapshot.child(phone).child("5").child("Location").getValue().toString());
                     cd5.setVisibility(View.VISIBLE);
                 } catch(Exception e){
 
@@ -220,21 +219,21 @@ public class productPublished extends AppCompatActivity implements NavigationVie
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(productPublished.this, Profile.class);
+                Intent profileIntent = new Intent(UserPublished.this, Profile.class);
                 startActivity(profileIntent);
             }
         });
         uphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(productPublished.this, Profile.class);
+                Intent profileIntent = new Intent(UserPublished.this, Profile.class);
                 startActivity(profileIntent);
             }
         });
         uname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileIntent = new Intent(productPublished.this, Profile.class);
+                Intent profileIntent = new Intent(UserPublished.this, Profile.class);
                 startActivity(profileIntent);
             }
         });
@@ -279,9 +278,9 @@ public class productPublished extends AppCompatActivity implements NavigationVie
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 if(check.equals("Hin")) {
-                    Toast.makeText(productPublished.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPublished.this, getResources().getString(R.string.error1), Toast.LENGTH_SHORT).show();
                 } else{
-                    Toast.makeText(productPublished.this, "There is some error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPublished.this, "There is some error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -298,19 +297,19 @@ public class productPublished extends AppCompatActivity implements NavigationVie
         switch (menuItem.getItemId()){
 
             case R.id.non_government:
-                Intent intent1 = new Intent(productPublished.this, Non_Government.class);
+                Intent intent1 = new Intent(UserPublished.this, Non_Government.class);
                 startActivity(intent1);
                 break;
             case R.id.free_lancing:
-                Intent intent = new Intent(productPublished.this, com.example.sih.Jobs.Free_Lancing.class);
+                Intent intent = new Intent(UserPublished.this, com.example.sih.Jobs.Free_Lancing.class);
                 startActivity(intent);
                 break;
             case R.id.government:
-                Intent intent2 = new Intent(productPublished.this, Government.class);
+                Intent intent2 = new Intent(UserPublished.this, Government.class);
                 startActivity(intent2);
                 break;
             case R.id.tenders:
-                Intent intent5 = new Intent(productPublished.this, Tenders.class);
+                Intent intent5 = new Intent(UserPublished.this, Tenders.class);
                 startActivity(intent5);
                 break;
         }
@@ -345,7 +344,7 @@ public class productPublished extends AppCompatActivity implements NavigationVie
                 }
                 return true;
             case R.id.logout: {
-                Intent intent = new Intent(productPublished.this, Login.class);
+                Intent intent = new Intent(UserPublished.this, Login.class);
                 startActivity(intent);
                 SharedPreferences.Editor editor = getSharedPreferences(S, i).edit();
                 editor.putString("Status", "Null");
@@ -354,7 +353,7 @@ public class productPublished extends AppCompatActivity implements NavigationVie
                 break;
             }
             case R.id.rate_us:
-                Intent rateIntent = new Intent(productPublished.this, Rating.class);
+                Intent rateIntent = new Intent(UserPublished.this, Rating.class);
                 startActivity(rateIntent);
                 return true;
 

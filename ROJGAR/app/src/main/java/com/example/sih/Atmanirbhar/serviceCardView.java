@@ -1,21 +1,20 @@
-package com.example.sih.PublishJob;
+package com.example.sih.Atmanirbhar;
 
-import com.example.sih.Registration.Login;
 
-public class vocationalPost {
+public class serviceCardView {
     private String JobName;
     private String Description;
-    private String Location;
     private String Phone;
+    private String Days;
 
-    public vocationalPost() {
+    public serviceCardView() {
     }
 
-    public vocationalPost(String jobName, String description, String location, String phone) {
-        JobName = jobName;
+    public serviceCardView(String jobname, String phone, String description, String days) {
+        JobName = jobname;
         Description = description;
-        Location = location;
         Phone = phone;
+        Days = days;
     }
 
     public String getJobName() {
@@ -34,19 +33,19 @@ public class vocationalPost {
         Description = description;
     }
 
-    public String getDays() {
-        return Location;
-    }
-
-    public void setDays(String location) {
-        Location = location;
-    }
-
     public String getPhone() {
         return Phone;
     }
 
     public void setPhone(String phone) {
         Phone = phone;
+    }
+
+    public String getDays() {
+        return Days;
+    }
+
+    public void setDays(String days) {
+        Days = days;
     }
 }

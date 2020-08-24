@@ -21,6 +21,11 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.mlkit.nl.smartreply.SmartReply;
+import com.google.mlkit.nl.smartreply.SmartReplyGenerator;
+import com.google.mlkit.nl.smartreply.SmartReplySuggestion;
+import com.google.mlkit.nl.smartreply.SmartReplySuggestionResult;
+import com.google.mlkit.nl.smartreply.TextMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +42,7 @@ public class Chat extends AppCompatActivity {
     String S, name, chatwith, phone, username;
     int i, count = 0;
     Intent intent;
+    List<TextMessage> conversation;
     Firebase reference1, reference2;
 
     @Override
@@ -57,6 +63,7 @@ public class Chat extends AppCompatActivity {
         Suggestion3 = findViewById(R.id.suggestion3);
         name = phone;
         Firebase.setAndroidContext(this);
+        conversation = new ArrayList<>();
         reference1 = new Firebase("https://smart-e60d6.firebaseio.com/messages/" + name + "_" + chatwith);
         reference2 = new Firebase("https://smart-e60d6.firebaseio.com/messages/" + chatwith + "_" + name);
 
@@ -125,6 +132,8 @@ public class Chat extends AppCompatActivity {
                 Map map = dataSnapshot.getValue(Map.class);
                 String message = map.get("message").toString();
                 String userName = map.get("user").toString();
+                conversation.add(TextMessage.createForLocalUser(message, System.currentTimeMillis()));
+                smartReply();
                 messageArea.setText("");
 
                 if(userName.equals(name)){
@@ -182,4 +191,45 @@ public class Chat extends AppCompatActivity {
         layout.addView(textView);
         scrollView.fullScroll(View.FOCUS_DOWN);
     }
+     public void smartReply(){
+         SmartReplyGenerator smartReply = SmartReply.getClient();
+         smartReply.suggestReplies(conversation)
+                 .addOnSuccessListener(new OnSuccessListener<SmartReplySuggestionResult>() {
+                     @Override
+                     public void onSuccess(SmartReplySuggestionResult result) {
+                         if (result.getStatus() == SmartReplySuggestionResult.STATUS_NOT_SUPPORTED_LANGUAGE) {
+                             // The conversation's language isn't supported, so
+                             // the result doesn't contain any suggestions.
+
+                         } else if (result.getStatus() == SmartReplySuggestionResult.STATUS_SUCCESS) {
+                             // Task completed successfully
+                             // ...
+                             for (SmartReplySuggestion suggestion : result.getSuggestions()) {
+                                 String replyText = suggestion.getText();
+                                 if(count == 0) {
+                                     Suggestion1.setVisibility(View.VISIBLE);
+                                     Suggestion1.setText(replyText);
+                                     count++;
+                                 } else if(count == 1) {
+                                     Suggestion2.setVisibility(View.VISIBLE);
+                                     Suggestion2.setText(replyText);
+                                     count++;
+                                 } else {
+                                     Suggestion3.setVisibility(View.VISIBLE);
+                                     Suggestion3.setText(replyText);
+                                     count = 0;
+                                 }
+                             }
+                         }
+                     }
+                 })
+                 .addOnFailureListener(new OnFailureListener() {
+                     @Override
+                     public void onFailure(@NonNull Exception e) {
+                         // Task failed with an exception
+                         // ...
+                         Toast.makeText(Chat.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                     }
+                 });
+     }
 }

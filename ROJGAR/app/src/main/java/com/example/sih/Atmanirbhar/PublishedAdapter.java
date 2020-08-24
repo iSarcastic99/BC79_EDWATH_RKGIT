@@ -1,4 +1,4 @@
-package com.example.sih.PublishJob;
+package com.example.sih.Atmanirbhar;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,16 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sih.Atmanirbhar.PublishedCardView;
 import com.example.sih.R;
 
 import java.util.ArrayList;
 
-public class vAdapter extends RecyclerView.Adapter<vAdapter.MyViewHolder> {
+public class PublishedAdapter extends RecyclerView.Adapter<PublishedAdapter.MyViewHolder> {
 
     Context context;
-    ArrayList<vocationalPost> posts;
+    ArrayList<PublishedCardView> posts;
 
-    public vAdapter(Context c, ArrayList<vocationalPost> j){
+    public PublishedAdapter(Context c, ArrayList<PublishedCardView> j){
         context = c;
         posts = j;
     }
@@ -26,14 +27,14 @@ public class vAdapter extends RecyclerView.Adapter<vAdapter.MyViewHolder> {
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.cardview,parent,false));
+        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.publishedcardview,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(posts.get(position).getJobName());
         holder.description.setText(posts.get(position).getDescription());
-        holder.duration.setText(posts.get(position).getDays());
+        holder.duration.setText(posts.get(position).getLocation());
         holder.contact.setText(posts.get(position).getPhone());
     }
 

@@ -36,7 +36,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cardCornerRadius="15dp"
-                        android:visibility="visible"
                         android:layout_marginBottom="125dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginEnd="5dp"
@@ -53,13 +52,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:autoStart="true"
-                            android:flipInterval="3000">
+                            android:flipInterval="5000">
                             <ImageView
                                 android:id="@+id/publish"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/ic_publish_banner2"
-                                android:onClick="publish"/>
+                                android:background="@drawable/ic_publish_banner2" />
                             <ImageView
                                 android:id="@+id/topJobs"
                                 android:layout_width="match_parent"
@@ -69,18 +67,17 @@
                                 android:id="@+id/premium"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/ic_sih_banner_swayam" />
+                                android:background="@drawable/ic_premium_banner" />
                             <ImageView
                                 android:id="@+id/dreamJob"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/ic_sih_banner_chatbot" />
+                                android:background="@drawable/ic_dreamjob_banner2" />
                             <ImageView
                                 android:id="@+id/roadmap"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/ic_roadmap_banner"
-                                android:visibility="gone"/>
+                                android:background="@drawable/ic_roadmap_banner" />
                         </ViewFlipper>
 
                     </androidx.cardview.widget.CardView>

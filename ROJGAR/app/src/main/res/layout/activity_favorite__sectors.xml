@@ -57,7 +57,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cbscience"/>
 
         <RadioButton
-            android:id="@+id/cbhealth"
+            android:id="@+id/cbfarming"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Healthcare and Medical"
@@ -93,7 +93,7 @@
             app:layout_constraintTop_toBottomOf="@id/cbcommunity"/>
 
         <RadioButton
-            android:id="@+id/cbfarming"
+            android:id="@+id/cbhealth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Farming, Fishing and Forestry"
